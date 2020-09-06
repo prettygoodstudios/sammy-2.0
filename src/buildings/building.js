@@ -14,4 +14,9 @@ export default class Building {
         const toTheLeft = this.x-cameraOffset[0] < canvas.width;
         return toTheRight && toTheLeft;
     }
+
+    collides = (geometry) => {
+        const left = geometry.x+geometry.width > this.x;
+        const right = geometry.x < this.x+this.width;
+    }
 }

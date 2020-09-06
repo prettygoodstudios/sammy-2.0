@@ -2,13 +2,12 @@ import PhysicalObject from "../physics/object";
 
 export default class Player extends PhysicalObject{
     constructor(x, y, color){
-        super(x, y, 50, 100, 20, 0.01, 20);
+        super(x, y, 50, 100, 50, 2, 50);
         this.color = color;
         window.addEventListener("keydown", (e) =>  this.handleKeyPress(e));
     }
 
     handleKeyPress = (e) => {
-        console.log(e);
         switch(e.key.toLowerCase()){
             case "arrowleft":
             case "d":
@@ -29,13 +28,14 @@ export default class Player extends PhysicalObject{
         }
     }
 
-    updatePlayer = (deltaTime, updateCameraOffset) => {
-        this.update(deltaTime);
+    updatePlayer = (deltaTime, updateCameraOffset, grounds) => {
+        this.update(deltaTime, grounds);
         updateCameraOffset(this.x, this.y);
     }
 
     render = (canvas, context, cameraOffset) => {
         context.fillStyle = this.color;
         context.fillRect(50, canvas.height/2-this.height, this.width, this.height);
+        
     }
 }

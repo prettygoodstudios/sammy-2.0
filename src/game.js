@@ -22,7 +22,7 @@ export default class Game {
         this.lastUpdate = currentTime;
         this.renderBackground();
         this.renderBuildings();
-        this.player.updatePlayer(deltaTime, this.updateCameraOffset);
+        this.player.updatePlayer(deltaTime, this.updateCameraOffset, this.buildings);
         this.player.render(this.canvas, this.context, this.cameraOffset);
         window.requestAnimationFrame(this.animate);
     }
@@ -34,14 +34,14 @@ export default class Game {
     generateBuildings = () => {
         this.buildings = [];
         let count = 0;
-        let top = 0;
+        let top = this.player.height;
         for(let i = 0; i < 10; i++){
             const blockLength = Math.floor(Math.random()*4)+6;
             const left = count*50;
             for(let j = 0; j < blockLength; j++){
                 this.buildings.push(new Window(left+j*50, top));
             }
-            top += Math.floor(Math.random()*300);
+            top += Math.floor(Math.random()*300)-150;
             count += blockLength;
         }
     }
@@ -49,12 +49,12 @@ export default class Game {
     renderBuildings = () => {
         this.buildings.forEach(b => {
             if(b.inFrame(this.cameraOffset, this.canvas)){
-                b.render(this.context, this.canvas, this.cameraOffset);
+                b.render(this.context, this.canvas, this.cameraOffset, this.player);
             }
         });
     }
 
     updateCameraOffset = (x = this.cameraOffset[0], y = this.cameraOffset[1]) => {
-        this.cameraOffset = [x, y ];
+        this.cameraOffset = [x, y];
     }
 }
