@@ -1,1 +1,5 @@
-alert("Hello World!");
+import Game from "./game";
+
+window.onload = () => {
+    new Game();
+}
