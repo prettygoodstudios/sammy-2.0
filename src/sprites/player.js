@@ -12,30 +12,30 @@ export default class Player extends PhysicalObject{
         switch(e.key.toLowerCase()){
             case "arrowleft":
             case "d":
-                this.velocityX -= this.acceleration;
+                this.velocityX += this.acceleration;
                 break;
             case "arrowright":
             case "a":
-                this.velocityX += this.acceleration;
+                this.velocityX -= this.acceleration;
                 break;
             case "arrowup":
             case "w":
-                this.velocityY -= this.acceleration;
+                this.velocityY += this.acceleration;
                 break;
             case "arrowdown":
             case "s":
-                this.velocityY += this.acceleration;
+                this.velocityY -= this.acceleration;
                 break;
         }
     }
 
     updatePlayer = (deltaTime, updateCameraOffset) => {
         this.update(deltaTime);
-        updateCameraOffset(this.x);
+        updateCameraOffset(this.x, this.y);
     }
 
     render = (canvas, context, cameraOffset) => {
         context.fillStyle = this.color;
-        context.fillRect(50, canvas.height/2+this.y-this.height, this.width, this.height);
+        context.fillRect(50, canvas.height/2-this.height, this.width, this.height);
     }
 }

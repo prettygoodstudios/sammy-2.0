@@ -12,10 +12,10 @@ export default class Window extends Building {
 
     render = (context, canvas, cameraOffset) => {
         context.fillStyle = this.color;
-        const remainder = canvas.height - this.y;
+        const remainder = canvas.height-cameraOffset[1] - this.y;
         const windowHeight = Math.ceil(remainder/this.height);
         for(let i = 0; i < windowHeight; i++){
-            context.fillRect(this.x-cameraOffset[0], cameraOffset[1]+this.y+i*this.height, this.width, this.height);
+            context.fillRect(this.x-cameraOffset[0], cameraOffset[1]+this.y+i*this.height+Math.floor(canvas.height/2), this.width, this.height);
         }
     }
 }
