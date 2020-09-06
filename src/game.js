@@ -1,5 +1,6 @@
 import Sky from "./landscapes/sky";
 import Window from "./buildings/window";
+import Player from "./sprites/player";
 
 export default class Game {
     constructor(){
@@ -8,7 +9,9 @@ export default class Game {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.lastUpdate = new Date().getTime();
+        this.cameraOffset = [0, Math.floor(this.canvas.height/2)];
         this.sky = new Sky();
+        this.player = new Player(50, 0, "red");
         this.generateBuildings();
         window.requestAnimationFrame(this.animate);
     }
@@ -19,6 +22,8 @@ export default class Game {
         this.lastUpdate = currentTime;
         this.renderBackground();
         this.renderBuildings();
+        this.player.updatePlayer(deltaTime, this.updateCameraOffset);
+        this.player.render(this.canvas, this.context, this.cameraOffset);
         window.requestAnimationFrame(this.animate);
     }
 
@@ -29,7 +34,7 @@ export default class Game {
     generateBuildings = () => {
         this.buildings = [];
         let count = 0;
-        let top = Math.floor(this.canvas.height/2);
+        let top = 0;
         for(let i = 0; i < 10; i++){
             const blockLength = Math.floor(Math.random()*4)+6;
             const left = count*50;
@@ -43,7 +48,13 @@ export default class Game {
 
     renderBuildings = () => {
         this.buildings.forEach(b => {
-            b.render(this.context, this.canvas);
+            if(b.inFrame(this.cameraOffset, this.canvas)){
+                b.render(this.context, this.canvas, this.cameraOffset);
+            }
         });
+    }
+
+    updateCameraOffset = (x = this.cameraOffset[0], y = this.cameraOffset[1]) => {
+        this.cameraOffset = [x, y ];
     }
 }
