@@ -14,7 +14,8 @@ export default class Sky {
         for(let i = 0; i < numberOfClouds; i++){
             const cloud = {
                 x,
-                y: Math.floor(Math.random()*this.height/2)
+                y: Math.floor(Math.random()*this.height/2),
+                speed: Math.random()*0.4
             }
             x+= Math.floor(Math.random()*this.width/numberOfClouds);
             this.clouds.push(cloud);
@@ -26,10 +27,10 @@ export default class Sky {
         context.fillRect(0, 0, canvas.width, canvas.height);
         this.clouds.forEach(c => {
             context.fillStyle = this.cloudColor;
-            context.fillRect(c.x-Math.floor(cameraOffset[0]*0.2)%this.width+50, c.y-50, 100, 50);
-            context.fillRect(c.x-Math.floor(cameraOffset[0]*0.2)%this.width+25, c.y-25, 25, 25);
-            context.fillRect(c.x-Math.floor(cameraOffset[0]*0.2)%this.width+150, c.y-25, 25, 25);
-            context.fillRect(c.x-Math.floor(cameraOffset[0]*0.2)%this.width, c.y, 200, 50);
+            context.fillRect(c.x-Math.floor(cameraOffset[0]*c.speed)%this.width+50, c.y-50, 100, 50);
+            context.fillRect(c.x-Math.floor(cameraOffset[0]*c.speed)%this.width+25, c.y-25, 25, 25);
+            context.fillRect(c.x-Math.floor(cameraOffset[0]*c.speed)%this.width+150, c.y-25, 25, 25);
+            context.fillRect(c.x-Math.floor(cameraOffset[0]*c.speed)%this.width, c.y, 200, 50);
         });
     }
 }
