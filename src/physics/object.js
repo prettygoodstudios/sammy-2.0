@@ -15,24 +15,35 @@ export default class PhysicalObject extends Geometry {
         this.gravity = 0.5;
     }
 
-    calculateGravity = (grounds) => {
+    calculateGravityAndCollsions = (grounds) => {
         let onGround = false;
         grounds.forEach(g => {
             if(this.collides(g)){
                 onGround = true;
-                g.color = "green";
-            }else{
-                g.color = "white";
+                if(!this.sideCollision(g)){
+                    this.y = g.y-this.height;
+                }
+            }
+            
+            if(this.leftCollision(g)){
+                this.velocityX = 0;
+                this.x = g.x-this.width-2;
+            }
+            if(this.rightCollision(g)){
+                this.velocityX = 0;
+                this.x = g.x+g.width+2;
             }
         });
-        if(!onGround){
-            this.velocityY += this.gravity;
-        }else{
+
+        if(onGround){
             this.velocityY = this.velocityY > 0 ? 0 : this.velocityY;
+        }else{
+            this.velocityY += this.gravity;
         }
     }
 
     update = (deltaTime, grounds) => {
+        this.calculateGravityAndCollsions(grounds);
         this.x += Math.floor(this.velocityX*deltaTime) % this.maxSpeed;
         this.y += Math.floor(this.velocityY*deltaTime) % this.maxSpeed;
         if(this.velocityX != 0){
@@ -43,7 +54,6 @@ export default class PhysicalObject extends Geometry {
             const velocityMagnitude = Math.abs(this.velocityY)-this.drag;
             this.velocityY =  velocityMagnitude > 0 ? velocityMagnitude*(this.velocityY/Math.abs(this.velocityY)) : 0;
         }
-        this.calculateGravity(grounds);
     }
 
     //Purely for debugging

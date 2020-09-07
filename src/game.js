@@ -36,8 +36,8 @@ export default class Game {
         this.buildings = [];
         let count = 0;
         let top = this.player.height;
-        for(let i = 0; i < 10; i++){
-            const blockLength = Math.floor(Math.random()*4)+6;
+        for(let i = 0; i < 20; i++){
+            const blockLength = Math.floor(Math.random()*8)+6;
             const left = count*50;
             for(let j = 0; j < blockLength; j++){
                 this.buildings.push(new Window(left+j*50, top));

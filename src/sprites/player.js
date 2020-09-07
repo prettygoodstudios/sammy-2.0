@@ -2,7 +2,7 @@ import PhysicalObject from "../physics/object";
 
 export default class Player extends PhysicalObject{
     constructor(x, y, color){
-        super(x, y, 50, 100, 4, 2, 50);
+        super(x, y, 50, 100, 20, 2, 50);
         this.color = color;
         window.addEventListener("keydown", (e) =>  this.handleKeyPress(e));
     }
