@@ -28,8 +28,11 @@ export default class Player extends PhysicalObject{
         }
     }
 
-    updatePlayer = (deltaTime, updateCameraOffset, grounds) => {
+    updatePlayer = (deltaTime, updateCameraOffset, grounds, offset) => {
         this.update(deltaTime, grounds);
+        if(this.x < offset){
+            this.x = offset;
+        }
         updateCameraOffset(this.x, -this.y);
     }
 
