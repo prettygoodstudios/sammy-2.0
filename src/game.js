@@ -10,7 +10,7 @@ export default class Game {
         this.canvas.height = window.innerHeight;
         this.lastUpdate = new Date().getTime();
         this.cameraOffset = [0, Math.floor(this.canvas.height/2)];
-        this.sky = new Sky();
+        this.sky = new Sky(this.canvas);
         this.initialPlayerPosition = 50;
         this.player = new Player(this.initialPlayerPosition, 0, "red");
         this.generateBuildings();
@@ -29,7 +29,7 @@ export default class Game {
     }
 
     renderBackground = () => {
-        this.sky.render(this.context, this.canvas);
+        this.sky.render(this.context, this.canvas, this.cameraOffset);
     }
 
     generateBuildings = () => {
