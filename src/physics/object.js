@@ -12,19 +12,23 @@ export default class PhysicalObject extends Geometry {
         this.acceleration = acceleration;
         this.velocityX = 0;
         this.velocityY = 0;
-        this.gravity = 2;
+        this.gravity = 0.5;
     }
 
     calculateGravity = (grounds) => {
         let onGround = false;
         grounds.forEach(g => {
             if(this.collides(g)){
-                console.log("Collision");
                 onGround = true;
+                g.color = "green";
+            }else{
+                g.color = "white";
             }
         });
         if(!onGround){
-            this.velocityY -= this.gravity;
+            this.velocityY += this.gravity;
+        }else{
+            this.velocityY = this.velocityY > 0 ? 0 : this.velocityY;
         }
     }
 

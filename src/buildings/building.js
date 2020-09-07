@@ -1,7 +1,10 @@
+import Geometry from "../physics/geometry";
+
 const NOT_IMPLEMENTED_ERROR = 'NOT_IMPLEMENTED!!!';
 
-export default class Building {
+export default class Building extends Geometry {
     constructor(){
+        super();
     }
 
 
@@ -10,13 +13,9 @@ export default class Building {
     }
 
     inFrame = (cameraOffset, canvas) => {
-        const toTheRight = this.x-cameraOffset[0]+this.width > 0;
+        const toTheRight = this.x-cameraOffset[0]+this.width+50 > 0;
         const toTheLeft = this.x-cameraOffset[0] < canvas.width;
         return toTheRight && toTheLeft;
     }
 
-    collides = (geometry) => {
-        const left = geometry.x+geometry.width > this.x;
-        const right = geometry.x < this.x+this.width;
-    }
 }

@@ -11,7 +11,8 @@ export default class Game {
         this.lastUpdate = new Date().getTime();
         this.cameraOffset = [0, Math.floor(this.canvas.height/2)];
         this.sky = new Sky();
-        this.player = new Player(50, 0, "red");
+        this.initialPlayerPosition = 50;
+        this.player = new Player(this.initialPlayerPosition, 0, "red");
         this.generateBuildings();
         window.requestAnimationFrame(this.animate);
     }
@@ -49,7 +50,7 @@ export default class Game {
     renderBuildings = () => {
         this.buildings.forEach(b => {
             if(b.inFrame(this.cameraOffset, this.canvas)){
-                b.render(this.context, this.canvas, this.cameraOffset, this.player);
+                b.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }
         });
     }

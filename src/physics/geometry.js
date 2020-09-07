@@ -1,11 +1,10 @@
 export default class Geometry {
 
     collides = (geometry) => {
-        const left = geometry.x+geometry.width > this.x;
-        const right = geometry.x < this.x+this.width;
-        const top = geometry.y + geometry.height > this.y;
-        const bottom = geometry.y < this.y+this.height;
-        console.log(left, right, top, bottom);
+        const left = this.x + this.width >= geometry.x;
+        const right = this.x <= geometry.x + geometry.width;
+        const top = this.y+this.height >= geometry.y;
+        const bottom = this.y <= geometry.y+geometry.height;
         return left && right && top && bottom;
     }
 
