@@ -1,6 +1,6 @@
 export default class Sky {
     constructor(canvas){
-        this.backgroundColor = "blue";
+        this.backgroundColor = "lightblue";
         this.cloudColor = "#ececec";
         this.clouds = [];
         this.width = canvas.width*10;
@@ -26,7 +26,10 @@ export default class Sky {
         context.fillRect(0, 0, canvas.width, canvas.height);
         this.clouds.forEach(c => {
             context.fillStyle = this.cloudColor;
-            context.fillRect(c.x-cameraOffset[0]%this.width, c.y, 200, 50);
+            context.fillRect(c.x-Math.floor(cameraOffset[0]*0.2)%this.width+50, c.y-50, 100, 50);
+            context.fillRect(c.x-Math.floor(cameraOffset[0]*0.2)%this.width+25, c.y-25, 25, 25);
+            context.fillRect(c.x-Math.floor(cameraOffset[0]*0.2)%this.width+150, c.y-25, 25, 25);
+            context.fillRect(c.x-Math.floor(cameraOffset[0]*0.2)%this.width, c.y, 200, 50);
         });
     }
 }
