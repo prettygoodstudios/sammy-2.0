@@ -1,13 +1,34 @@
 import PhysicalObject from "../physics/object";
 
+
+export const PLAYER_HEIGHT = 50;
+
 export default class Player extends PhysicalObject{
-    constructor(x, y, color){
-        super(x, y, 50, 100, 20, 2, 50);
+    constructor(x, y, color, grounds){
+        super(x, y, PLAYER_HEIGHT, 100, 20, 2, 50);
         this.color = color;
-        window.addEventListener("keydown", (e) =>  this.handleKeyPress(e));
+        window.addEventListener("keydown", (e) =>  this.handleKeyPress(e, grounds));
     }
 
-    handleKeyPress = (e) => {
+    handleKeyPress = (e, grounds) => {
+        let onGround = false;
+        grounds.forEach(g => {
+            if(this.collides(g)){
+                onGround = true;
+            }
+        });
+        if(onGround){
+            switch(e.key.toLowerCase()){
+                case "arrowup":
+                case "w":
+                    this.velocityY -= this.acceleration;
+                    break;
+                case "arrowdown":
+                case "s":
+                    this.velocityY += this.acceleration;
+                    break;
+            }
+        }
         switch(e.key.toLowerCase()){
             case "arrowright":
             case "d":
@@ -16,14 +37,6 @@ export default class Player extends PhysicalObject{
             case "arrowleft":
             case "a":
                 this.velocityX -= this.acceleration;
-                break;
-            case "arrowup":
-            case "w":
-                this.velocityY -= this.acceleration;
-                break;
-            case "arrowdown":
-            case "s":
-                this.velocityY += this.acceleration;
                 break;
         }
     }

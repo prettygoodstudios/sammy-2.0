@@ -1,6 +1,6 @@
 import Sky from "./landscapes/sky";
 import Window from "./buildings/window";
-import Player from "./sprites/player";
+import Player, { PLAYER_HEIGHT } from "./sprites/player";
 
 export default class Game {
     constructor(){
@@ -12,8 +12,8 @@ export default class Game {
         this.cameraOffset = [0, Math.floor(this.canvas.height/2)];
         this.sky = new Sky(this.canvas);
         this.initialPlayerPosition = 50;
-        this.player = new Player(this.initialPlayerPosition, 0, "red");
         this.generateBuildings();
+        this.player = new Player(this.initialPlayerPosition, 0, "red", this.buildings);
         window.requestAnimationFrame(this.animate);
     }
 
@@ -35,7 +35,7 @@ export default class Game {
     generateBuildings = () => {
         this.buildings = [];
         let count = 0;
-        let top = this.player.height;
+        let top = PLAYER_HEIGHT;
         for(let i = 0; i < 20; i++){
             const blockLength = Math.floor(Math.random()*8)+6;
             const left = count*50;
