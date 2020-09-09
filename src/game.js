@@ -24,6 +24,7 @@ export default class Game {
         this.lastUpdate = currentTime;
         this.renderBackground();
         this.renderBuildings(deltaTime);
+        this.player.killRobots(this.robots);
         this.player.updatePlayer(deltaTime, this.updateCameraOffset, this.buildings, this.initialPlayerPosition);
         this.player.render(this.canvas, this.context, this.cameraOffset);
         window.requestAnimationFrame(this.animate);

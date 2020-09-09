@@ -48,4 +48,25 @@ export default class Player extends PhysicalObject{
         context.fillStyle = this.color;
         context.fillRect(50, canvas.height/2-this.height, this.width, this.height);
     }
+
+    killRobots = (robots) => {
+        const killIndexes = [];
+        robots.forEach((r, i) => {
+            if(this.collides(r)){
+                if(this.topCollision(r)){
+                    killIndexes.push(i);
+                }else{
+                    this.die();
+                }
+            }
+        });
+        killIndexes.forEach(k => {
+            robots.splice(k, 1);
+        });
+    }
+
+    die = () => {
+        this.x = 0;
+        this.y = -this.height*2;
+    }
 }
