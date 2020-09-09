@@ -7,10 +7,21 @@ export const mainMenu = document.getElementById("mainMenu");
 const canvas = document.getElementById("world");
 
 window.onload = () => {
-    //new Game();
+
+    const spaceListener = (e) => {
+        if(e.key === " "){
+            startGame();
+        }
+    }
+    window.addEventListener("keypress", spaceListener, {once: true});
     playButton.addEventListener("click", (e) => {
-        mainMenu.style.display = "none";
-        canvas.style.display = "block";
-        new Game();
+        window.removeEventListener("keypress", spaceListener);
+        startGame();
     });
+}
+
+const startGame = () => {
+    mainMenu.style.display = "none";
+    canvas.style.display = "block";
+    new Game();
 }
