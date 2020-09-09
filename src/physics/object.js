@@ -67,4 +67,14 @@ export default class PhysicalObject extends Geometry {
         context.closePath();
         context.stroke();
     }
+
+    onGround = (grounds) => {
+        let onGround = false;
+        grounds.forEach(g => {
+            if(this.collides(g)){
+                onGround = true;
+            }
+        });
+        return onGround;
+    }
 }

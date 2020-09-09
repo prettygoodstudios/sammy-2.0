@@ -11,12 +11,7 @@ export default class Player extends PhysicalObject{
     }
 
     handleKeyPress = (e, grounds) => {
-        let onGround = false;
-        grounds.forEach(g => {
-            if(this.collides(g)){
-                onGround = true;
-            }
-        });
+        const onGround = this.onGround(grounds);
         if(onGround){
             switch(e.key.toLowerCase()){
                 case "arrowup":
