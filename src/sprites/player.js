@@ -1,13 +1,15 @@
 import PhysicalObject from "../physics/object";
+import { endGame } from "..";
 
 
 export const PLAYER_HEIGHT = 50;
 
 export default class Player extends PhysicalObject{
-    constructor(x, y, color, grounds){
+    constructor(x, y, color, grounds, endGame){
         super(x, y, PLAYER_HEIGHT, 100, 20, 2, 50);
         this.color = color;
-        window.addEventListener("keydown", (e) =>  this.handleKeyPress(e, grounds));
+        this.endGame = endGame
+        this.keyPressListener = window.addEventListener("keydown", (e) =>  this.handleKeyPress(e, grounds));
     }
 
     handleKeyPress = (e, grounds) => {
@@ -66,7 +68,11 @@ export default class Player extends PhysicalObject{
     }
 
     die = () => {
-        this.x = 0;
-        this.y = -this.height*2;
+        this.removeEventListeners();
+        this.endGame();
+    }
+
+    removeEventListeners = () => {
+        window.removeEventListener("click", this.keyPressListener);
     }
 }

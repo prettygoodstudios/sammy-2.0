@@ -1,0 +1,18 @@
+
+
+.main-menu{
+    display: grid;
+    grid-template-rows: 1fr 40px;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    &__body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    &__footer{
+        display: flex;
+        justify-content: center;
+    }
+}

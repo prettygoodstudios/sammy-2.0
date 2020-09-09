@@ -2,11 +2,13 @@ import Sky from "./landscapes/sky";
 import Window from "./buildings/window";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { ROBOT_HEIGHT } from "./sprites/robot";
+import { mainMenu } from ".";
 
 export default class Game {
     constructor(){
         this.canvas = document.getElementById("world");
         this.context = this.canvas.getContext("2d");
+        this.canvas.style.display = "block";
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.lastUpdate = new Date().getTime();
@@ -14,8 +16,13 @@ export default class Game {
         this.sky = new Sky(this.canvas);
         this.initialPlayerPosition = 50;
         this.generateBuildings();
-        this.player = new Player(this.initialPlayerPosition, -300, "red", this.buildings);
-        window.requestAnimationFrame(this.animate);
+        this.player = this.initializePlayer();
+        this.loop = window.requestAnimationFrame(this.animate);
+        this.over = false;
+    }
+
+    initializePlayer(){
+        return new Player(this.initialPlayerPosition, -300, "red", this.buildings, this.endGame);
     }
 
     animate = () => {
@@ -23,11 +30,13 @@ export default class Game {
         const deltaTime = currentTime  - this.lastUpdate;
         this.lastUpdate = currentTime;
         this.renderBackground();
-        this.renderBuildings(deltaTime);
-        this.player.killRobots(this.robots);
+        this.renderBuildings(deltaTime);  
         this.player.updatePlayer(deltaTime, this.updateCameraOffset, this.buildings, this.initialPlayerPosition);
         this.player.render(this.canvas, this.context, this.cameraOffset);
-        window.requestAnimationFrame(this.animate);
+        this.player.killRobots(this.robots);  
+        if(!this.over){
+            this.loop = window.requestAnimationFrame(this.animate);
+        }
     }
 
     renderBackground = () => {
@@ -68,5 +77,12 @@ export default class Game {
 
     updateCameraOffset = (x = this.cameraOffset[0], y = this.cameraOffset[1]) => {
         this.cameraOffset = [x, y];
+    }
+
+    endGame = () => {
+        window.cancelAnimationFrame(this.loop);
+        this.over = true;
+        this.canvas.style.display = "none";
+        mainMenu.style.display = "grid";
     }
 }
