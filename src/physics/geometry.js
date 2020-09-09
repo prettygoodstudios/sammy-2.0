@@ -23,4 +23,10 @@ export default class Geometry {
         return this.sideCollision(geometry) && geometry.x > this.x;
     }
 
+    inFrame = (cameraOffset, canvas) => {
+        const toTheRight = this.x-cameraOffset[0]+this.width+50 > 0;
+        const toTheLeft = this.x-cameraOffset[0] < canvas.width;
+        return toTheRight && toTheLeft;
+    }
+
 }

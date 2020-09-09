@@ -12,8 +12,10 @@ export default class Robot extends PhysicalObject {
     }
 
     render = (context, canvas, cameraOffset, player, offset) => {
-        context.fillStyle = this.color;
-        context.fillRect(this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
+        if(this.inFrame(cameraOffset, canvas)){
+            context.fillStyle = this.color;
+            context.fillRect(this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
+        }
     }
 
     updateRobot = (deltaTime, grounds) => {
