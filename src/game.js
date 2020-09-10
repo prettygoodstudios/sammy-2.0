@@ -2,7 +2,7 @@ import Sky from "./landscapes/sky";
 import Window from "./buildings/window";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { ROBOT_HEIGHT } from "./sprites/robot";
-import { mainMenu } from ".";
+import { mainMenu, gameOverMenu, scoreSpan } from ".";
 import Coin from "./landscapes/coin";
 
 export default class Game {
@@ -20,6 +20,8 @@ export default class Game {
         this.player = this.initializePlayer();
         this.loop = window.requestAnimationFrame(this.animate);
         this.over = false;
+        this.score = 0;
+        this.textColor = "#ececec";
     }
 
     initializePlayer(){
@@ -35,10 +37,17 @@ export default class Game {
         this.player.updateSprite(deltaTime, this.buildings, this.updateCameraOffset, this.initialPlayerPosition);
         this.player.render(this.canvas, this.context, this.cameraOffset);
         this.player.killRobots(this.robots);  
-        this.player.collectCoins(this.coins);
+        this.player.collectCoins(this.coins, this.incrementScore);
+        this.renderScore();
         if(!this.over){
             this.loop = window.requestAnimationFrame(this.animate);
         }
+    }
+
+    renderScore = () => {
+        this.context.font = "50px Avenir";
+        this.context.fillStyle = this.textColor;
+        this.context.fillText(this.score, this.canvas.width-50, 50);
     }
 
     renderBackground = () => {
@@ -91,10 +100,15 @@ export default class Game {
         this.cameraOffset = [x, y];
     }
 
+    incrementScore = (score) => {
+        this.score += score;
+    }
+
     endGame = () => {
         window.cancelAnimationFrame(this.loop);
         this.over = true;
         this.canvas.style.display = "none";
-        mainMenu.style.display = "grid";
+        gameOverMenu.style.display = "flex";
+        scoreSpan.innerHTML = this.score;
     }
 }

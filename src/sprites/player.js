@@ -66,7 +66,7 @@ export default class Player extends Sprite{
         });
     }
 
-    collectCoins = (coins) => {
+    collectCoins = (coins, incrementScore) => {
         const collection = [];
         coins.forEach((c, i) => {
             if(this.collides(c)){
@@ -76,6 +76,7 @@ export default class Player extends Sprite{
         collection.forEach(c => {
             coins.splice(c, 1);
         });
+        incrementScore(collection.length);
     }
 
     die = () => {

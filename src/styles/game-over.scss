@@ -1,0 +1,12 @@
+
+.game-over{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 2em;
+    height: 100vh;
+    button{
+        font-size: 1.2em;
+    }
+}
