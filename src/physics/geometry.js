@@ -1,5 +1,12 @@
 export default class Geometry {
 
+    constructor(x, y, width, height){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
     collides = (geometry) => {
         const left = this.x + this.width >= geometry.x;
         const right = this.x <= geometry.x + geometry.width;

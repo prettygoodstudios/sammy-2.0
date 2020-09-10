@@ -2,11 +2,7 @@ import Building from "./building";
 
 export default class Window extends Building {
     constructor(x, y){
-        super();
-        this.width = 50;
-        this.height = 50;
-        this.x = x;
-        this.y = y;
+        super(x, y, 50, 50);
         this.color = "white";
         this.grassColor = "green";
         this.darkDirt = "brown";
