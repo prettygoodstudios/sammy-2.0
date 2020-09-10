@@ -66,6 +66,18 @@ export default class Player extends Sprite{
         });
     }
 
+    collectCoins = (coins) => {
+        const collection = [];
+        coins.forEach((c, i) => {
+            if(this.collides(c)){
+                collection.push(i);
+            }
+        });
+        collection.forEach(c => {
+            coins.splice(c, 1);
+        });
+    }
+
     die = () => {
         this.removeEventListeners();
         this.endGame();

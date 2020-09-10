@@ -3,6 +3,7 @@ import Window from "./buildings/window";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { ROBOT_HEIGHT } from "./sprites/robot";
 import { mainMenu } from ".";
+import Coin from "./landscapes/coin";
 
 export default class Game {
     constructor(){
@@ -34,6 +35,7 @@ export default class Game {
         this.player.updateSprite(deltaTime, this.buildings, this.updateCameraOffset, this.initialPlayerPosition);
         this.player.render(this.canvas, this.context, this.cameraOffset);
         this.player.killRobots(this.robots);  
+        this.player.collectCoins(this.coins);
         if(!this.over){
             this.loop = window.requestAnimationFrame(this.animate);
         }
@@ -48,11 +50,18 @@ export default class Game {
         let count = 0;
         let top = PLAYER_HEIGHT;
         this.robots = [];
+        this.coins = [];
         for(let i = 0; i < 20; i++){
             const blockLength = Math.floor(Math.random()*8)+6;
             const left = count*50;
+            let coinPlaced = false;
             for(let j = 0; j < blockLength; j++){
                 this.buildings.push(new Window(left+j*50, top));
+                if(!coinPlaced && Math.random() > 0.95){
+                    coinPlaced = true;
+                    const coin = new Coin(left+j*50, top-50, 25);
+                    this.coins.push(coin);
+                }
             }
             if(Math.random() > 0.5){
                 const robot = new Robot(left, top-ROBOT_HEIGHT, 1);
@@ -72,6 +81,9 @@ export default class Game {
         this.robots.forEach(r => {
             r.updateSprite(deltaTime, this.buildings);
             r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
+        });
+        this.coins.forEach(c => {
+            c.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
         });
     }
 
