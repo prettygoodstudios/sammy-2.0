@@ -31,7 +31,7 @@ export default class Game {
         this.lastUpdate = currentTime;
         this.renderBackground();
         this.renderBuildings(deltaTime);  
-        this.player.updatePlayer(deltaTime, this.updateCameraOffset, this.buildings, this.initialPlayerPosition);
+        this.player.updateSprite(deltaTime, this.buildings, this.updateCameraOffset, this.initialPlayerPosition);
         this.player.render(this.canvas, this.context, this.cameraOffset);
         this.player.killRobots(this.robots);  
         if(!this.over){
@@ -70,7 +70,7 @@ export default class Game {
             }
         });
         this.robots.forEach(r => {
-            r.updateRobot(deltaTime, this.buildings);
+            r.updateSprite(deltaTime, this.buildings);
             r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
         });
     }

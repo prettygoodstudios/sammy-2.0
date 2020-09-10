@@ -4,4 +4,19 @@ html, body{
     padding: 0;
     margin: 0;
     overflow: hidden;
+    font-family: 'Avenir';
+    color: #ececec;
+    background-color: lightblue;
+}
+
+
+button{
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    background-color: #ececec;
+    color: gray;
+    &:hover{
+        cursor: pointer;
+    }
 }

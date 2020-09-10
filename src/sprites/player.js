@@ -1,10 +1,9 @@
-import PhysicalObject from "../physics/object";
-import { endGame } from "..";
+import Sprite from "./sprite";
 
 
 export const PLAYER_HEIGHT = 50;
 
-export default class Player extends PhysicalObject{
+export default class Player extends Sprite{
     constructor(x, y, color, grounds, endGame){
         super(x, y, PLAYER_HEIGHT, 100, 20, 2, 50);
         this.color = color;
@@ -38,7 +37,7 @@ export default class Player extends PhysicalObject{
         }
     }
 
-    updatePlayer = (deltaTime, updateCameraOffset, grounds, offset) => {
+    updateSprite = (deltaTime, grounds, updateCameraOffset, offset) => {
         this.update(deltaTime, grounds);
         if(this.x < offset){
             this.x = offset;

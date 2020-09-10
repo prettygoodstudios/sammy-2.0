@@ -1,8 +1,8 @@
-import PhysicalObject from "../physics/object";
+import Sprite from "./sprite";
 
 export const ROBOT_HEIGHT = 50;
 
-export default class Robot extends PhysicalObject {
+export default class Robot extends Sprite {
     constructor(x, y, direction){
         super(x, y, 50, ROBOT_HEIGHT, 3, 0.1, 10);
         this.color = "black";
@@ -18,7 +18,7 @@ export default class Robot extends PhysicalObject {
         }
     }
 
-    updateRobot = (deltaTime, grounds) => {
+    updateSprite = (deltaTime, grounds) => {
         this.velocityX += this.acceleration;
         this.switchDirection();
         this.jump(grounds);
