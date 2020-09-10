@@ -7,18 +7,17 @@ const mainMenu = document.getElementById("mainMenu");
 const canvas = document.getElementById("world");
 export const gameOverMenu = document.getElementById("gameOver");
 const playAgain = document.getElementById("playAgain");
-export const scoreSpan = document.getElementById("gameOverScore");
+const scoreSpan = document.getElementById("gameOverScore");
+
+const spaceListener = (e) => {
+    if(e.key === " "){
+        startGame();
+    }
+}
+window.addEventListener("keypress", spaceListener, {once: true});
 
 window.onload = () => {
-
-    const spaceListener = (e) => {
-        if(e.key === " "){
-            startGame();
-        }
-    }
-    window.addEventListener("keypress", spaceListener, {once: true});
     playButton.addEventListener("click", (e) => {
-        window.removeEventListener("keypress", spaceListener);
         startGame();
     });
     playAgain.addEventListener("click", (e) => {
@@ -27,8 +26,17 @@ window.onload = () => {
 }
 
 const startGame = () => {
+    window.removeEventListener("keypress", spaceListener);
     mainMenu.style.display = "none";
     gameOverMenu.style.display = "none";
     canvas.style.display = "block";
     new Game();
+}
+
+export const showGameOver = (score) => {
+    gameOverMenu.display = "flex";
+    canvas.style.display = "none";
+    gameOverMenu.style.display = "flex";
+    scoreSpan.innerHTML = score;
+    window.addEventListener("keypress", spaceListener, {once: true});
 }

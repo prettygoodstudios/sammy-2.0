@@ -2,7 +2,7 @@ import Sky from "./landscapes/sky";
 import Window from "./buildings/window";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { ROBOT_HEIGHT } from "./sprites/robot";
-import { mainMenu, gameOverMenu, scoreSpan } from ".";
+import { showGameOver } from ".";
 import Coin from "./landscapes/coin";
 
 export default class Game {
@@ -107,8 +107,6 @@ export default class Game {
     endGame = () => {
         window.cancelAnimationFrame(this.loop);
         this.over = true;
-        this.canvas.style.display = "none";
-        gameOverMenu.style.display = "flex";
-        scoreSpan.innerHTML = this.score;
+        showGameOver(this.score);
     }
 }
