@@ -71,7 +71,7 @@ export default class Player extends Sprite{
             if(onGround){
                 switch(k){
                     case "up":
-                        this.velocityY -= this.acceleration;
+                        this.velocityY -= this.acceleration*2;
                         break;
                     case "down":
                         this.velocityY += this.acceleration;
