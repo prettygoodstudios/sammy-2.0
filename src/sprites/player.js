@@ -1,43 +1,92 @@
 import Sprite from "./sprite";
 
 
-export const PLAYER_HEIGHT = 50;
+export const PLAYER_HEIGHT = 100;
 
 export default class Player extends Sprite{
     constructor(x, y, color, grounds, endGame){
-        super(x, y, PLAYER_HEIGHT, 100, 20, 2, 50);
+        super(x, y, 50, PLAYER_HEIGHT, 40, 10, 50);
         this.color = color;
-        this.endGame = endGame
-        this.keyPressListener = window.addEventListener("keydown", (e) =>  this.handleKeyPress(e, grounds));
+        this.endGame = endGame;
+        this.keys = [];
+        this.keyPressListener = window.addEventListener("keydown", (e) =>  this.handleKeyPress(e));
+        this.keyUpListener = window.addEventListener("keyup", (e) =>  this.handleKeyUp(e));
     }
 
-    handleKeyPress = (e, grounds) => {
-        const onGround = this.onGround(grounds);
-        if(onGround){
-            switch(e.key.toLowerCase()){
-                case "arrowup":
-                case "w":
-                    this.velocityY -= this.acceleration;
-                    break;
-                case "arrowdown":
-                case "s":
-                    this.velocityY += this.acceleration;
-                    break;
-            }
-        }
+
+
+    handleKeyPress = (e) => {
         switch(e.key.toLowerCase()){
+            case "arrowup":
+            case "w":
+                if(this.keys.indexOf("up") === -1){
+                    this.keys.push("up");
+                }
+                break;
+            case "arrowdown":
+            case "s":
+                if(this.keys.indexOf("down") === -1){
+                    this.keys.push("down");
+                }
+                break;
             case "arrowright":
             case "d":
-                this.velocityX += this.acceleration;
+                if(this.keys.indexOf("right") === -1){
+                    this.keys.push("right");
+                }
                 break;
             case "arrowleft":
             case "a":
-                this.velocityX -= this.acceleration;
+                if(this.keys.indexOf("left") === -1){
+                    this.keys.push("left");
+                }
+                break;
+        }
+    }
+
+    handleKeyUp = (e) => {
+        switch(e.key.toLowerCase()){
+            case "arrowup":
+            case "w":
+                this.keys.splice(this.keys.indexOf("up"), 1);
+                break;
+            case "arrowdown":
+            case "s":
+                this.keys.splice(this.keys.indexOf("down"), 1);
+                break;
+            case "arrowright":
+            case "d":
+                this.keys.splice(this.keys.indexOf("right"), 1);
+                break;
+            case "arrowleft":
+            case "a":
+                this.keys.splice(this.keys.indexOf("left"), 1);
                 break;
         }
     }
 
     updateSprite = (deltaTime, grounds, updateCameraOffset, offset) => {
+        const onGround = this.onGround(grounds);
+        this.keys.forEach(k => {
+            if(onGround){
+                switch(k){
+                    case "up":
+                        this.velocityY -= this.acceleration;
+                        break;
+                    case "down":
+                        this.velocityY += this.acceleration;
+                        break;
+                }
+            }
+            switch(k){
+                case "right":
+                    this.velocityX += this.acceleration;
+                    break;
+                case "left":
+                    this.velocityX -= this.acceleration;
+                    break;
+            }
+        });
         this.update(deltaTime, grounds);
         if(this.x < offset){
             this.x = offset;
@@ -85,6 +134,7 @@ export default class Player extends Sprite{
     }
 
     removeEventListeners = () => {
-        window.removeEventListener("click", this.keyPressListener);
+        window.removeEventListener("keydown", this.handleKeyPress);
+        window.removeEventListener("keyup", this.handleKeyUp);
     }
 }

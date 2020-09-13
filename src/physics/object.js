@@ -2,11 +2,7 @@ import Geometry from "./geometry";
 
 export default class PhysicalObject extends Geometry {
     constructor(x, y, width, height, acceleration, drag, maxSpeed){
-        super();
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        super(x, y, width, height);
         this.drag = drag;
         this.maxSpeed = maxSpeed;
         this.acceleration = acceleration;
@@ -25,11 +21,11 @@ export default class PhysicalObject extends Geometry {
                 }
             }
             
-            if(this.leftCollision(g)){
+            if(this.leftCollision(g, 0)){
                 this.velocityX = 0;
                 this.x = g.x-this.width-2;
             }
-            if(this.rightCollision(g)){
+            if(this.rightCollision(g, 0)){
                 this.velocityX = 0;
                 this.x = g.x+g.width+2;
             }
@@ -40,20 +36,24 @@ export default class PhysicalObject extends Geometry {
         }else{
             this.velocityY += this.gravity;
         }
+
+        return onGround;
     }
 
     update = (deltaTime, grounds) => {
-        this.calculateGravityAndCollsions(grounds);
+        const onGround = this.calculateGravityAndCollsions(grounds);
         this.x += Math.floor(this.velocityX*deltaTime) % this.maxSpeed;
         this.y += Math.floor(this.velocityY*deltaTime) % this.maxSpeed;
+        const adjustedDrag = onGround ? this.drag*4 : this.drag;
         if(this.velocityX != 0){
-            const velocityMagnitude = Math.abs(this.velocityX)-this.drag;
+            const velocityMagnitude = Math.abs(this.velocityX)-adjustedDrag;
             this.velocityX =  velocityMagnitude > 0 ? velocityMagnitude*(this.velocityX/Math.abs(this.velocityX)) : 0;
         }
         if(this.velocityY != 0){
             const velocityMagnitude = Math.abs(this.velocityY)-this.drag;
             this.velocityY =  velocityMagnitude > 0 ? velocityMagnitude*(this.velocityY/Math.abs(this.velocityY)) : 0;
         }
+        
     }
 
     //Purely for debugging

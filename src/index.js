@@ -5,7 +5,7 @@ import styles from "./styles/main.scss";
 const playButton = document.getElementById("playButton");
 const mainMenu = document.getElementById("mainMenu");
 const canvas = document.getElementById("world");
-export const gameOverMenu = document.getElementById("gameOver");
+const gameOverMenu = document.getElementById("gameOver");
 const playAgain = document.getElementById("playAgain");
 const scoreSpan = document.getElementById("gameOverScore");
 
