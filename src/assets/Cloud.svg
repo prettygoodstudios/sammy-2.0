@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="688px" height="420px" viewBox="0 0 688 420" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Cloud</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-159.000000, -109.000000)" fill="#ECECEC">
+            <g id="Cloud" transform="translate(159.000000, 109.000000)">
+                <circle id="Oval" cx="125" cy="244" r="125"></circle>
+                <circle id="Oval" cx="250" cy="149" r="125"></circle>
+                <circle id="Oval" cx="265" cy="274" r="125"></circle>
+                <circle id="Oval" cx="408" cy="125" r="125"></circle>
+                <circle id="Oval" cx="422" cy="295" r="125"></circle>
+                <circle id="Oval" cx="563" cy="208" r="125"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

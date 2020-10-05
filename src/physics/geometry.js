@@ -23,20 +23,20 @@ export default class Geometry {
         return left && right && top && bottom;
     }
 
-    sideCollision = (geometry, useBottom = false) => {
-        const left = this.x + this.width >= geometry.x;
-        const right = this.x <= geometry.x + geometry.width;
+    sideCollision = (geometry, margin = 0, useBottom = false) => {
+        const left = this.x + this.width >= geometry.x - margin;
+        const right = this.x <= geometry.x + geometry.width + margin;
         const top = this.y+this.height >= geometry.y + geometry.height-10;
         const bottom = !useBottom || this.y <= geometry.y+geometry.height;
         return left && top && right && bottom;
     }
 
-    rightCollision = (geometry) => {
-        return this.sideCollision(geometry) && geometry.x < this.x+this.width;
+    rightCollision = (geometry, margin = 0) => {
+        return this.sideCollision(geometry, margin) && geometry.x < this.x+this.width;
     }
 
-    leftCollision = (geometry) => {
-        return this.sideCollision(geometry) && geometry.x > this.x;
+    leftCollision = (geometry, margin = 0) => {
+        return this.sideCollision(geometry, margin) && geometry.x > this.x;
     }
 
     inFrame = (cameraOffset, canvas) => {

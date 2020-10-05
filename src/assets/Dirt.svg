@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Dirt</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-332.000000, -662.000000)">
+            <g id="Grass" transform="translate(332.000000, 662.000000)">
+                <g id="Dirt">
+                    <rect id="Rectangle" fill="#D7CCC8" x="0" y="0" width="300" height="300"></rect>
+                    <path d="M0,68 C20.7859661,66.2368286 34.3959921,64.352063 40.8300781,62.3457031 C72.1148556,52.5900792 100.799257,47.0078125 126.460937,47.0078125 C148.464377,47.0078125 168.979757,91.0096185 218,79.171875 C235.191067,75.0204586 262.5244,71.2965003 300,68 L300,204 C264.009431,221.530383 236.676098,228.80382 218,225.820313 C177.37947,219.33118 131.787349,176.210938 104.890625,176.210938 C59.4444444,176.210938 24.4809028,185.473958 0,204 L0,68 Z" id="Rectangle" fill="#A1887F"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

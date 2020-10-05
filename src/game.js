@@ -65,7 +65,13 @@ export default class Game {
             const left = count*50;
             let coinPlaced = false;
             for(let j = 0; j < blockLength; j++){
-                this.buildings.push(new Window(left+j*50, top));
+                let position = "middle";
+                if(i-1 >= 0 && j == 0){
+                    position = "left";
+                }else if (j == blockLength-1){
+                    position = "right";
+                }
+                this.buildings.push(new Window(left+j*50, top, position));
                 if(!coinPlaced && Math.random() > 0.95){
                     coinPlaced = true;
                     const coin = new Coin(left+j*50, top-50, 25);
