@@ -1,4 +1,9 @@
 import Sprite from "./sprite";
+import RobotFrame1 from "../assets/RobotFrame1.svg";
+import RobotFrame2 from "../assets/RobotFrame2.svg";
+import RobotFrame3 from "../assets/RobotFrame3.svg";
+import RobotFrame4 from "../assets/RobotFrame4.svg";
+import RobotFrame5 from "../assets/RobotFrame5.svg";
 
 export const ROBOT_HEIGHT = 50;
 
@@ -9,12 +14,29 @@ export default class Robot extends Sprite {
         this.direction = direction;
         this.velocity = 2;
         this.acceleration = this.direction*this.velocity;  
+        this.spriteImages = [
+            RobotFrame1,
+            RobotFrame2,
+            RobotFrame3,
+            RobotFrame4,
+            RobotFrame5
+        ]
+        this.forwardSprites = [];
+        this.forwardSpritesPosition = 0;
+        this.spriteImages.forEach(s => {
+            const img = new Image();
+            img.src = s;
+            this.forwardSprites.push(img);
+        });
+        this.image = this.spriteImages[0];
     }
 
     render = (context, canvas, cameraOffset, player, offset) => {
+        this.forwardSpritesPosition = this.animate(this.forwardSprites, this.forwardSpritesPosition);
         if(this.inFrame(cameraOffset, canvas)){
-            context.fillStyle = this.color;
-            context.fillRect(this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
+            //context.fillStyle = this.color;
+            //context.fillRect(this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
+            context.drawImage(this.image, this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
         }
     }
 

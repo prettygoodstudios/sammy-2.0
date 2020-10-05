@@ -12,4 +12,13 @@ export default class Sprite extends PhysicalObject {
     render = (context, canvas, cameraOffset, player, offset) => {
         throw new Error();
     }
+
+    animate = (sprites, position) => {
+        this.image = sprites[position];
+        position++;
+        if(position >= sprites.length){
+            position = 0;
+        }
+        return position;
+    }
 }
