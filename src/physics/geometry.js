@@ -26,7 +26,7 @@ export default class Geometry {
     sideCollision = (geometry, margin = 0, useBottom = false) => {
         const left = this.x + this.width >= geometry.x - margin;
         const right = this.x <= geometry.x + geometry.width + margin;
-        const top = this.y+this.height >= geometry.y + geometry.height-10;
+        const top = this.y+this.height >= geometry.y + geometry.height+10;
         const bottom = !useBottom || this.y <= geometry.y+geometry.height;
         return left && top && right && bottom;
     }

@@ -1,3 +1,4 @@
+import Player from "../sprites/player";
 import Geometry from "./geometry";
 
 export default class PhysicalObject extends Geometry {
@@ -24,7 +25,7 @@ export default class PhysicalObject extends Geometry {
             if(this.leftCollision(g, Math.abs(this.velocityX))){
                 this.x = g.x-this.width-1;
             }
-            if(this.rightCollision(g, Math.abs(this.velocityX))){
+            if(this.rightCollision(g, Math.abs(this.velocityX)) && typeof Player){
                 this.x = g.x+g.width+1;
             }
         });
