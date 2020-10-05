@@ -36,7 +36,9 @@ export default class Window extends Building {
                 }
                 context.drawImage(image, this.x-cameraOffset[0]+offset, cameraOffset[1]+this.y+i*this.height+Math.floor(canvas.height/2)-player.height, this.width, this.width);
             }else{
-                context.drawImage(this.dirt, this.x-cameraOffset[0]+offset, cameraOffset[1]+this.y+i*this.height+Math.floor(canvas.height/2)-player.height, this.width, this.width);
+                context.fillStyle = "#D7CCC8";
+                context.fillRect(this.x-cameraOffset[0]+offset, cameraOffset[1]+this.y+i*this.height+Math.floor(canvas.height/2)-player.height, this.width, this.width);
+                //context.drawImage(this.dirt, this.x-cameraOffset[0]+offset, cameraOffset[1]+this.y+i*this.height+Math.floor(canvas.height/2)-player.height, this.width, this.width);
             } 
         }
     }
