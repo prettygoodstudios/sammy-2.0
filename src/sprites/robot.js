@@ -7,6 +7,24 @@ import RobotFrame5 from "../assets/RobotFrame5.svg";
 
 export const ROBOT_HEIGHT = 50;
 
+const sprites = [];
+
+export const constructRobotImages = () => {
+    const images = [
+        RobotFrame1,
+        RobotFrame2,
+        RobotFrame3,
+        RobotFrame4,
+        RobotFrame5
+    ]
+
+    images.forEach(i => {
+        const img = new Image();
+        img.src = i;
+        sprites.push(img);
+    });
+}
+
 export default class Robot extends Sprite {
     constructor(x, y, direction){
         super(x, y, 50, ROBOT_HEIGHT, 3, 0.1, 10);
@@ -14,21 +32,9 @@ export default class Robot extends Sprite {
         this.direction = direction;
         this.velocity = 2;
         this.acceleration = this.direction*this.velocity;  
-        this.spriteImages = [
-            RobotFrame1,
-            RobotFrame2,
-            RobotFrame3,
-            RobotFrame4,
-            RobotFrame5
-        ]
-        this.forwardSprites = [];
+        this.forwardSprites = sprites;
         this.forwardSpritesPosition = 0;
-        this.spriteImages.forEach(s => {
-            const img = new Image();
-            img.src = s;
-            this.forwardSprites.push(img);
-        });
-        this.image = this.spriteImages[0];
+        this.image = this.forwardSprites[0];
     }
 
     render = (context, canvas, cameraOffset, player, offset) => {
