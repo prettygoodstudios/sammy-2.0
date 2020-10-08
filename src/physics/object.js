@@ -16,8 +16,8 @@ export default class PhysicalObject extends Geometry {
         let onGround = false;
         grounds.forEach(g => {
             if(this.collides(g)){
-                onGround = true;
                 if(!this.sideCollision(g)){
+                    onGround = true;
                     this.y = g.y-this.height;
                 }
             }
