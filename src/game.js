@@ -1,5 +1,5 @@
 import Sky from "./landscapes/sky";
-import Window from "./buildings/window";
+import Window, { instatiateGrassImages } from "./buildings/window";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { constructRobotImages, ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver } from ".";
@@ -17,6 +17,7 @@ export default class Game {
         this.sky = new Sky(this.canvas);
         this.initialPlayerPosition = 50;
         constructRobotImages();
+        instatiateGrassImages();
         this.generateBuildings();
         this.player = this.initializePlayer();
         this.loop = window.requestAnimationFrame(this.animate);
