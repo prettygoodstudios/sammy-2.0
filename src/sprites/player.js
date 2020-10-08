@@ -48,7 +48,6 @@ export default class Player extends Sprite{
         switch(e.key.toLowerCase()){
             case "arrowup":
             case "w":
-                this.keys.splice(this.keys.indexOf("up"), 1);
                 break;
             case "arrowdown":
             case "s":
@@ -71,6 +70,7 @@ export default class Player extends Sprite{
             if(onGround){
                 switch(k){
                     case "up":
+                        this.keys.splice(this.keys.indexOf("up"), 1);
                         this.velocityY -= this.acceleration*2;
                         break;
                     case "down":
