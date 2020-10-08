@@ -32,7 +32,7 @@ export default class Sky {
         context.fillStyle = this.backgroundColor;
         context.fillRect(0, 0, canvas.width, canvas.height);
         this.clouds.forEach(c => {
-            context.drawImage(this.cloud, c.x-Math.floor(cameraOffset[0]*c.speed)%this.width, c.y, 100*c.size, 200*c.size);
+            context.drawImage(this.cloud, c.x-Math.floor(cameraOffset[0]*c.speed)%this.width, c.y, Math.floor(200*c.size), Math.floor(100*c.size));
             /*
             context.fillStyle = this.cloudColor;
             context.fillRect(c.x-Math.floor(cameraOffset[0]*c.speed)%this.width+50, c.y-50, 100, 50);
