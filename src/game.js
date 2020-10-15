@@ -3,7 +3,7 @@ import Window, { instatiateGrassImages } from "./buildings/window";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { constructRobotImages, ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver } from ".";
-import Coin from "./landscapes/coin";
+import Coin, { loadCoinSprites } from "./landscapes/coin";
 
 export default class Game {
     constructor(){
@@ -18,6 +18,7 @@ export default class Game {
         this.initialPlayerPosition = 50;
         constructRobotImages();
         instatiateGrassImages();
+        loadCoinSprites();
         this.generateBuildings();
         this.player = this.initializePlayer();
         this.loop = window.requestAnimationFrame(this.animate);
@@ -62,7 +63,7 @@ export default class Game {
         let top = PLAYER_HEIGHT;
         this.robots = [];
         this.coins = [];
-        for(let i = 0; i < 20; i++){
+        for(let i = 0; i < 80; i++){
             const blockLength = Math.floor(Math.random()*8)+6;
             const left = count*50;
             let coinPlaced = false;

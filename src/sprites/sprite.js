@@ -1,3 +1,4 @@
+import { animate } from "../helpers/animation";
 import PhysicalObject from "../physics/object";
 
 export default class Sprite extends PhysicalObject {
@@ -14,12 +15,6 @@ export default class Sprite extends PhysicalObject {
     }
 
     animate = (sprites, position, rate=0.2) => {
-        const coeff = Math.ceil(1/rate);
-        this.image = sprites[Math.floor(position/coeff)];
-        position+=1;
-        if(position >= sprites.length*coeff){
-            position = 0;
-        }
-        return position;
+        return animate(this, sprites, position, rate);
     }
 }
