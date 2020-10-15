@@ -45,4 +45,8 @@ export default class Geometry {
         return toTheRight && toTheLeft;
     }
 
+    toRightOfFrame = (cameraOffset, canvas) => {
+        return this.x-cameraOffset[0]+this.width > canvas.width;
+    }
+
 }

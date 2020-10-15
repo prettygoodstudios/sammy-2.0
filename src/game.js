@@ -91,18 +91,27 @@ export default class Game {
     }
 
     renderBuildings = (deltaTime) => {
-        this.buildings.forEach(b => {
+        for(const b of this.buildings){
             if(b.inFrame(this.cameraOffset, this.canvas)){
                 b.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
+            }else if(b.toRightOfFrame(this.cameraOffset, this.canvas)){
+                break;
+            }
+        }
+        this.robots.forEach(r => {
+            if(r.inFrame(this.cameraOffset, this.canvas)){
+                r.updateSprite(deltaTime, this.buildings);
+                r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }
         });
-        this.robots.forEach(r => {
-            r.updateSprite(deltaTime, this.buildings);
-            r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
-        });
-        this.coins.forEach(c => {
-            c.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
-        });
+        for(const c of this.coins){
+            console.log("hello")
+            if(c.inFrame(this.cameraOffset, this.canvas)){
+                c.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
+            }else if(c.toRightOfFrame(this.cameraOffset, this.canvas)){
+                break;
+            }
+        }
     }
 
     updateCameraOffset = (x = this.cameraOffset[0], y = this.cameraOffset[1]) => {
