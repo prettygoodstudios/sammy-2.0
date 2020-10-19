@@ -105,7 +105,6 @@ export default class Game {
             }
         });
         for(const c of this.coins){
-            console.log("hello")
             if(c.inFrame(this.cameraOffset, this.canvas)){
                 c.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }else if(c.toRightOfFrame(this.cameraOffset, this.canvas)){
