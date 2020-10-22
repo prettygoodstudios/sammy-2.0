@@ -1,5 +1,5 @@
 import Sky from "./landscapes/sky";
-import Window, { instatiateGrassImages } from "./buildings/window";
+import Ground, { instantiateGrassImages } from "./buildings/window";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { constructRobotImages, ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver } from ".";
@@ -17,9 +17,9 @@ export default class Game {
         this.sky = new Sky(this.canvas);
         this.initialPlayerPosition = 50;
         constructRobotImages();
-        instatiateGrassImages();
+        instantiateGrassImages();
         loadCoinSprites();
-        this.generateBuildings();
+        this.generateLandscape();
         this.player = this.initializePlayer();
         this.loop = window.requestAnimationFrame(this.animate);
         this.over = false;
@@ -28,7 +28,7 @@ export default class Game {
     }
 
     initializePlayer(){
-        return new Player(this.initialPlayerPosition, -300, "red", this.buildings, this.endGame);
+        return new Player(this.initialPlayerPosition, -300, "red", this.grounds, this.endGame);
     }
 
     animate = () => {
@@ -36,8 +36,8 @@ export default class Game {
         const deltaTime = currentTime  - this.lastUpdate;
         this.lastUpdate = currentTime;
         this.renderBackground();
-        this.renderBuildings(deltaTime);  
-        this.player.updateSprite(deltaTime, this.buildings, this.updateCameraOffset, this.initialPlayerPosition);
+        this.renderLandscapes(deltaTime);  
+        this.player.updateSprite(deltaTime, this.grounds, this.updateCameraOffset, this.initialPlayerPosition);
         this.player.render(this.canvas, this.context, this.cameraOffset);
         this.player.killRobots(this.robots);  
         this.player.collectCoins(this.coins, this.incrementScore);
@@ -57,8 +57,8 @@ export default class Game {
         this.sky.render(this.context, this.canvas, this.cameraOffset);
     }
 
-    generateBuildings = () => {
-        this.buildings = [];
+    generateLandscape = () => {
+        this.grounds = [];
         let count = 0;
         let top = PLAYER_HEIGHT;
         this.robots = [];
@@ -74,7 +74,7 @@ export default class Game {
                 }else if (j == blockLength-1){
                     position = "right";
                 }
-                this.buildings.push(new Window(left+j*50, top, position));
+                this.grounds.push(new Ground(left+j*50, top, position));
                 if(!coinPlaced && Math.random() > 0.95){
                     coinPlaced = true;
                     const coin = new Coin(left+j*50, top-50, 25);
@@ -90,8 +90,8 @@ export default class Game {
         }
     }
 
-    renderBuildings = (deltaTime) => {
-        for(const b of this.buildings){
+    renderLandscapes = (deltaTime) => {
+        for(const b of this.grounds){
             if(b.inFrame(this.cameraOffset, this.canvas)){
                 b.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }else if(b.toRightOfFrame(this.cameraOffset, this.canvas)){
@@ -100,7 +100,7 @@ export default class Game {
         }
         this.robots.forEach(r => {
             if(r.inFrame(this.cameraOffset, this.canvas)){
-                r.updateSprite(deltaTime, this.buildings);
+                r.updateSprite(deltaTime, this.grounds);
                 r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }
         });

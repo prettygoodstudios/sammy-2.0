@@ -4,7 +4,7 @@ import Geometry from "../physics/geometry";
 
 const NOT_IMPLEMENTED_ERROR = 'NOT_IMPLEMENTED!!!';
 
-export default class Building extends Geometry {
+export default class Landscape extends Geometry {
     constructor(x, y, width, height){
         super(x, y, width, height);
     }
