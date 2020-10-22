@@ -40,8 +40,6 @@ export default class Robot extends Sprite {
     render = (context, canvas, cameraOffset, player, offset) => {
         this.forwardSpritesPosition = this.animate(this.forwardSprites, this.forwardSpritesPosition);
         if(this.inFrame(cameraOffset, canvas)){
-            //context.fillStyle = this.color;
-            //context.fillRect(this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
             context.drawImage(this.image, this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
         }
     }
