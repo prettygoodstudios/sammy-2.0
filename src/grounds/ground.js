@@ -1,4 +1,4 @@
-import Landscape from "./building";
+import Landscape from "./landscape";
 import LeftGrass from "../assets/LeftGrass.svg";
 import RightGrass from "../assets/RightGrass.svg";
 import MiddleGrass from "../assets/MiddleGrass.svg";

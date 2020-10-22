@@ -1,5 +1,5 @@
 import Sky from "./landscapes/sky";
-import Ground, { instantiateGrassImages } from "./buildings/window";
+import Ground, { instantiateGrassImages } from "./grounds/ground";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { constructRobotImages, ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver } from ".";
