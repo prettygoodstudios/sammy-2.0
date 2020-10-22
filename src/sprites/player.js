@@ -4,7 +4,7 @@ import Sprite from "./sprite";
 export const PLAYER_HEIGHT = 100;
 
 export default class Player extends Sprite{
-    constructor(x, y, color, grounds, endGame){
+    constructor(x, y, color, endGame){
         super(x, y, 50, PLAYER_HEIGHT, 40, 10, 50);
         this.color = color;
         this.endGame = endGame;

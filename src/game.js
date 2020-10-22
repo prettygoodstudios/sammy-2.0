@@ -28,7 +28,7 @@ export default class Game {
     }
 
     initializePlayer(){
-        return new Player(this.initialPlayerPosition, -300, "red", this.grounds, this.endGame);
+        return new Player(this.initialPlayerPosition, -300, "red", this.endGame);
     }
 
     animate = () => {

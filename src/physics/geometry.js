@@ -36,7 +36,7 @@ export default class Geometry {
     }
 
     leftCollision = (geometry, margin = 0) => {
-        return this.sideCollision(geometry, margin) && geometry.x - geometry.width > this.x;
+        return this.sideCollision(geometry, margin) && geometry.x > this.x;
     }
 
     inFrame = (cameraOffset, canvas) => {
