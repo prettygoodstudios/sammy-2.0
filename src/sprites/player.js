@@ -1,5 +1,9 @@
 import Sprite from "./sprite";
 
+import player0 from "../assets/player0.svg";
+import player1 from "../assets/player1.svg";
+import player2 from "../assets/player2.svg";
+
 
 export const PLAYER_HEIGHT = 100;
 
@@ -63,6 +67,18 @@ export default class Player extends Sprite{
         if(TouchController.isTouchEnabled()){
             this.controller = new TouchController(this.addKey, this.removeKey);
         }
+        this.walkFrames = [];
+        const playerFrame0 = new Image();
+        playerFrame0.src = player0;
+        this.walkFrames.push(playerFrame0);
+        const playerFrame1 = new Image();
+        playerFrame1.src = player1;
+        this.walkFrames.push(playerFrame1);
+        const playerFrame2 = new Image();
+        playerFrame2.src = player2;
+        this.walkFrames.push(playerFrame2);
+        this.image = this.walkFrames[0];
+        this.walkPosition = 0;
     }
 
     addKey = (k) => {
@@ -148,6 +164,9 @@ export default class Player extends Sprite{
                     break;
             }
         });
+        if(this.velocityX != 0 && this.onGround(grounds)){
+            this.walkPosition = this.animate(this.walkFrames, this.walkPosition, 0.2);
+        }
         this.update(deltaTime, grounds);
         if(this.x < offset){
             this.x = offset;
@@ -156,8 +175,7 @@ export default class Player extends Sprite{
     }
 
     render = (canvas, context, cameraOffset) => {
-        context.fillStyle = this.color;
-        context.fillRect(50, canvas.height/2-this.height, this.width, this.height);
+        context.drawImage(this.image, 50, canvas.height/2-this.height, this.width, this.height);
     }
 
     killRobots = (robots) => {

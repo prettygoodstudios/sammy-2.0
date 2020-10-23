@@ -19,13 +19,22 @@ $bottom: 50px;
         }
     }
 
+    @media only screen and (max-width: 400px){
+        $margin: 10px;
+        .controller__left-btns{
+            left: $margin;
+        }
+        .controller__right-btns{
+            right: $margin;
+        }
+    }
+
     &__left-btns{
         position: absolute;
         display: flex;
         flex-direction: column;
         bottom: $bottom;
         left: $margin;
-        transform: translate(0, -50%);
     }
 
     &__right-btns{
