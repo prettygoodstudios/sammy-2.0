@@ -3,6 +3,53 @@ import Sprite from "./sprite";
 
 export const PLAYER_HEIGHT = 100;
 
+class TouchController {
+    constructor(){
+        this.addElements();
+    }
+
+    addElements = () => {
+        const leftButtons = document.createElement("div");
+        leftButtons.className = "controller__left-btns";
+        const upButton = this.createButton("upButton", "^", () => alert("tocuhed"), () => alert("lifted"));
+        const downButton = this.createButton("downButton", "v", () => alert("tocuhed"), () => alert("lifted"));
+        leftButtons.appendChild(upButton);
+        leftButtons.appendChild(downButton);
+        const rightButtons = document.createElement("div");
+        rightButtons.className = "controller__right-btns";
+        const leftButton =  this.createButton("leftButton", "<", () => alert("left"), () => alert("lifted"));
+        const rightButton = this.createButton("rightButton", ">", () => alert("right"), () => alert("lifted"));
+        rightButtons.appendChild(leftButton);
+        rightButtons.appendChild(rightButton);
+        const controllerEl = document.createElement("div");
+        controllerEl.className = "controller";
+        controllerEl.appendChild(leftButtons);
+        controllerEl.appendChild(rightButtons);
+        document.body.appendChild(controllerEl);
+    }
+
+    createButton = (id, text, touchListener, liftListener) => {
+        const button = document.createElement("button");
+        button.addEventListener("touchstart", touchListener);
+        button.addEventListener("touchend", liftListener);
+        button.innerHTML = text;
+        button.id = id;
+        button.className = "controller__btn";
+        return button;
+    }
+
+    removeElements = () => {
+        document.removeChild(document.querySelector(".controller"));
+    }
+
+    static isTouchEnabled() { 
+        return ( 'ontouchstart' in window ) ||  
+            ( navigator.maxTouchPoints > 0 ) ||  
+            ( navigator.msMaxTouchPoints > 0 ); 
+    } 
+
+}
+
 export default class Player extends Sprite{
     constructor(x, y, color, endGame){
         super(x, y, 50, PLAYER_HEIGHT, 40, 10, 50);
@@ -11,6 +58,9 @@ export default class Player extends Sprite{
         this.keys = [];
         this.keyPressListener = window.addEventListener("keydown", (e) =>  this.handleKeyPress(e));
         this.keyUpListener = window.addEventListener("keyup", (e) =>  this.handleKeyUp(e));
+        if(TouchController.isTouchEnabled()){
+            this.controller = new TouchController();
+        }
     }
 
 
@@ -133,6 +183,9 @@ export default class Player extends Sprite{
 
     die = () => {
         this.removeEventListeners();
+        if(this.controller){
+            this.controller.removeElements();
+        }
         this.endGame();
     }
 
