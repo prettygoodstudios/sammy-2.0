@@ -20,7 +20,7 @@ class TouchController {
         const rightButtons = document.createElement("div");
         rightButtons.className = "controller__right-btns";
         const leftButton =  this.createButton("leftButton", "<", () => this.touchListener("a"), () => this.liftListener("a"));
-        const rightButton = this.createButton("rightButton", ">", () => this.touchListener("d"), () => this.liftListener(d));
+        const rightButton = this.createButton("rightButton", ">", () => this.touchListener("d"), () => this.liftListener("d"));
         rightButtons.appendChild(leftButton);
         rightButtons.appendChild(rightButton);
         const controllerEl = document.createElement("div");
