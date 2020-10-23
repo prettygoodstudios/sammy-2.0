@@ -4,21 +4,23 @@ import Sprite from "./sprite";
 export const PLAYER_HEIGHT = 100;
 
 class TouchController {
-    constructor(){
+    constructor(touchListner, liftListener){
+        this.touchListener = touchListner;
+        this.liftListener = liftListener;
         this.addElements();
     }
 
     addElements = () => {
         const leftButtons = document.createElement("div");
         leftButtons.className = "controller__left-btns";
-        const upButton = this.createButton("upButton", "^", () => alert("tocuhed"), () => alert("lifted"));
-        const downButton = this.createButton("downButton", "v", () => alert("tocuhed"), () => alert("lifted"));
+        const upButton = this.createButton("upButton", "^", () => this.touchListener("w"), () => this.liftListener("w"));
+        const downButton = this.createButton("downButton", "v", () => this.touchListener("s"), () => this.liftListener("s"));
         leftButtons.appendChild(upButton);
         leftButtons.appendChild(downButton);
         const rightButtons = document.createElement("div");
         rightButtons.className = "controller__right-btns";
-        const leftButton =  this.createButton("leftButton", "<", () => alert("left"), () => alert("lifted"));
-        const rightButton = this.createButton("rightButton", ">", () => alert("right"), () => alert("lifted"));
+        const leftButton =  this.createButton("leftButton", "<", () => this.touchListener("a"), () => this.liftListener("a"));
+        const rightButton = this.createButton("rightButton", ">", () => this.touchListener("d"), () => this.liftListener(d));
         rightButtons.appendChild(leftButton);
         rightButtons.appendChild(rightButton);
         const controllerEl = document.createElement("div");
@@ -39,7 +41,7 @@ class TouchController {
     }
 
     removeElements = () => {
-        document.removeChild(document.querySelector(".controller"));
+        document.body.removeChild(document.querySelector(".controller"));
     }
 
     static isTouchEnabled() { 
@@ -59,14 +61,12 @@ export default class Player extends Sprite{
         this.keyPressListener = window.addEventListener("keydown", (e) =>  this.handleKeyPress(e));
         this.keyUpListener = window.addEventListener("keyup", (e) =>  this.handleKeyUp(e));
         if(TouchController.isTouchEnabled()){
-            this.controller = new TouchController();
+            this.controller = new TouchController(this.addKey, this.removeKey);
         }
     }
 
-
-
-    handleKeyPress = (e) => {
-        switch(e.key.toLowerCase()){
+    addKey = (k) => {
+        switch(k){
             case "arrowup":
             case "w":
                 if(this.keys.indexOf("up") === -1){
@@ -94,8 +94,12 @@ export default class Player extends Sprite{
         }
     }
 
-    handleKeyUp = (e) => {
-        switch(e.key.toLowerCase()){
+    handleKeyPress = (e) => {
+        this.addKey(e.key.toLowerCase());
+    }
+
+    removeKey = (k) => {
+        switch(k){
             case "arrowup":
             case "w":
                 if(this.keys.indexOf("up") != -1){
@@ -115,6 +119,10 @@ export default class Player extends Sprite{
                 this.keys.splice(this.keys.indexOf("left"), 1);
                 break;
         }
+    }
+
+    handleKeyUp = (e) => {
+        this.removeKey(e.key.toLowerCase());
     }
 
     updateSprite = (deltaTime, grounds, updateCameraOffset, offset) => {
