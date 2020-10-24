@@ -4,6 +4,7 @@ import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { constructRobotImages, ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver } from ".";
 import Coin, { loadCoinSprites } from "./landscapes/coin";
+import PauseMenu from "./pauseMenu";
 
 export default class Game {
     constructor(){
@@ -24,7 +25,9 @@ export default class Game {
         this.loop = window.requestAnimationFrame(this.animate);
         this.over = false;
         this.score = 0;
+        this.paused = false;
         this.textColor = "#ececec";
+        this.pause = new PauseMenu(() => this.paused = true, () =>  this.paused = false );
     }
 
     initializePlayer(){
@@ -35,13 +38,15 @@ export default class Game {
         const currentTime = new Date().getTime()
         const deltaTime = currentTime  - this.lastUpdate;
         this.lastUpdate = currentTime;
-        this.renderBackground();
-        this.renderLandscapes(deltaTime);  
-        this.player.updateSprite(deltaTime, this.grounds, this.updateCameraOffset, this.initialPlayerPosition);
-        this.player.render(this.canvas, this.context, this.cameraOffset);
-        this.player.killRobots(this.robots);  
-        this.player.collectCoins(this.coins, this.incrementScore);
-        this.renderScore();
+        if(!this.paused){
+            this.renderBackground();
+            this.renderLandscapes(deltaTime);  
+            this.player.updateSprite(deltaTime, this.grounds, this.updateCameraOffset, this.initialPlayerPosition);
+            this.player.render(this.canvas, this.context, this.cameraOffset);
+            this.player.killRobots(this.robots);  
+            this.player.collectCoins(this.coins, this.incrementScore);
+            this.renderScore();
+        }
         if(!this.over){
             this.loop = window.requestAnimationFrame(this.animate);
         }
@@ -122,6 +127,7 @@ export default class Game {
     }
 
     endGame = () => {
+        this.pause.remove();
         window.cancelAnimationFrame(this.loop);
         this.over = true;
         showGameOver(this.score);

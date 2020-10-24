@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="211px" height="354px" viewBox="0 0 211 354" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ninja2</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Player-Sprite-Sheets" transform="translate(-584.000000, -428.000000)">
+            <g id="ninja2" transform="translate(591.000000, 433.000000)">
+                <rect id="Rectangle" stroke="#979797" stroke-width="10" fill="#FFFFFF" x="26" y="69" width="139" height="189" rx="69.5"></rect>
+                <rect id="Rectangle" stroke="#979797" stroke-width="10" fill="#FFFFFF" x="26" y="0" width="139" height="139" rx="69.5"></rect>
+                <ellipse id="Oval" fill="#FFFCD9" cx="96" cy="68" rx="64" ry="24"></ellipse>
+                <ellipse id="Oval" fill="#000000" cx="73" cy="69" rx="16" ry="12"></ellipse>
+                <ellipse id="Oval" fill="#000000" cx="118" cy="69" rx="16" ry="12"></ellipse>
+                <ellipse id="Oval" stroke="#979797" stroke-width="10" fill="#FFFFFF" transform="translate(57.000000, 277.000000) rotate(34.000000) translate(-57.000000, -277.000000) " cx="57" cy="277" rx="29" ry="58"></ellipse>
+                <ellipse id="Oval" stroke="#979797" stroke-width="10" fill="#FFFFFF" transform="translate(139.000000, 263.000000) rotate(-36.000000) translate(-139.000000, -263.000000) " cx="139" cy="263" rx="29" ry="58"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,8 +1,8 @@
 import Sprite from "./sprite";
 
-import player0 from "../assets/player0.svg";
-import player1 from "../assets/player1.svg";
-import player2 from "../assets/player2.svg";
+import player0 from "../assets/ninja0.svg";
+import player1 from "../assets/ninja1.svg";
+import player2 from "../assets/ninja2.svg";
 
 
 export const PLAYER_HEIGHT = 100;
