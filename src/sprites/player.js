@@ -166,6 +166,9 @@ export default class Player extends Sprite{
         });
         if(this.velocityX != 0 && this.onGround(grounds)){
             this.walkPosition = this.animate(this.walkFrames, this.walkPosition, 0.2);
+        }else{ 
+            this.image = this.walkFrames[0];
+            this.walkPosition = 0;
         }
         this.update(deltaTime, grounds);
         if(this.x < offset){
