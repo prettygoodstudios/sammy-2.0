@@ -1,10 +1,11 @@
 export default class PauseMenu {
 
-    constructor(pause, unPause){
+    constructor(pause, unPause, exit){
         this.pauseDiv = document.createElement("div");
         this.pauseDiv.className = "pause";
         this.unPause = unPause;
         this.pause = pause;
+        this.exit = exit;
         this.addPauseBtn();
         document.body.appendChild(this.pauseDiv);
     }
@@ -25,11 +26,19 @@ export default class PauseMenu {
     showMenu = () => {
         const menu = document.createElement("div");
         menu.className = "pause__menu";
+
         const resume = document.createElement("button");
         resume.className = "pause__menu__btn";
         resume.innerHTML = "Resume";
         resume.addEventListener("click", this.resume);
         menu.appendChild(resume);
+
+        const exit = document.createElement("button");
+        exit.className = "pause__menu__btn";
+        exit.innerHTML = "Go Home";
+        exit.addEventListener("click", this.goHome);
+        menu.appendChild(exit);
+
         this.pauseDiv.appendChild(menu);
         document.querySelector(".pause__btn").remove();
     }
@@ -42,6 +51,11 @@ export default class PauseMenu {
     resume = () => {
         this.hideMenu();
         this.unPause();
+    }
+
+    goHome = () => {
+        this.hideMenu();
+        this.exit();
     }
 
     remove = () => {

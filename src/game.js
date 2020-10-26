@@ -2,7 +2,7 @@ import Sky from "./landscapes/sky";
 import Ground, { instantiateGrassImages } from "./grounds/ground";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { constructRobotImages, ROBOT_HEIGHT } from "./sprites/robot";
-import { showGameOver } from ".";
+import { showGameOver, showMainMenu } from ".";
 import Coin, { loadCoinSprites } from "./landscapes/coin";
 import PauseMenu from "./pauseMenu";
 
@@ -27,7 +27,11 @@ export default class Game {
         this.score = 0;
         this.paused = false;
         this.textColor = "#ececec";
-        this.pause = new PauseMenu(() => this.paused = true, () =>  this.paused = false );
+        this.pause = new PauseMenu(() => this.paused = true, () =>  this.paused = false, () => {
+            this.terminate();
+            this.player.endPlayer();
+            showMainMenu(); 
+        });
     }
 
     initializePlayer(){
@@ -126,10 +130,14 @@ export default class Game {
         this.score += score;
     }
 
-    endGame = () => {
+    terminate = () => {
         this.pause.remove();
         window.cancelAnimationFrame(this.loop);
         this.over = true;
+    }
+
+    endGame = () => {
+        this.terminate();
         showGameOver(this.score);
     }
 }

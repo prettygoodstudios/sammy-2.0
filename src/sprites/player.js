@@ -45,7 +45,7 @@ class TouchController {
     }
 
     removeElements = () => {
-        document.body.removeChild(document.querySelector(".controller"));
+        document.querySelector(".controller").remove();
     }
 
     static isTouchEnabled() { 
@@ -211,11 +211,15 @@ export default class Player extends Sprite{
     }
 
     die = () => {
+        this.endPlayer();
+        this.endGame();
+    }
+
+    endPlayer = () => {
         this.removeEventListeners();
         if(this.controller){
             this.controller.removeElements();
         }
-        this.endGame();
     }
 
     removeEventListeners = () => {

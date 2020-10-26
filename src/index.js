@@ -17,12 +17,24 @@ const spaceListener = (e) => {
 window.addEventListener("keypress", spaceListener, {once: true});
 
 window.onload = () => {
-    playButton.addEventListener("click", (e) => {
-        startGame();
-    });
-    playAgain.addEventListener("click", (e) => {
-        startGame();
-    });
+    showMainMenu();
+}
+
+playButton.addEventListener("click", (e) => {
+    startGame();
+});
+playAgain.addEventListener("click", (e) => {
+    startGame();
+});
+
+export const showMainMenu = () => {
+    mainMenu.style.display = "grid";
+    gameOverMenu.style.display = "none";
+    canvas.style.display = "none";
+    const pause = document.querySelector(".pause");
+    if(pause){
+        pause.remove();
+    }
 }
 
 const startGame = () => {
