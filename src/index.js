@@ -1,4 +1,7 @@
 import Game from "./game";
+import { instantiateGrassImages } from "./grounds/ground";
+import { loadCoinSprites } from "./landscapes/coin";
+import { constructRobotImages } from "./sprites/robot";
 
 import styles from "./styles/main.scss";
 
@@ -17,6 +20,9 @@ const spaceListener = (e) => {
 window.addEventListener("keypress", spaceListener, {once: true});
 
 window.onload = () => {
+    constructRobotImages();
+    instantiateGrassImages();
+    loadCoinSprites();
     showMainMenu();
 }
 

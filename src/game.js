@@ -1,9 +1,9 @@
 import Sky from "./landscapes/sky";
-import Ground, { instantiateGrassImages } from "./grounds/ground";
+import Ground from "./grounds/ground";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
-import Robot, { constructRobotImages, ROBOT_HEIGHT } from "./sprites/robot";
+import Robot, { ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver, showMainMenu } from ".";
-import Coin, { loadCoinSprites } from "./landscapes/coin";
+import Coin from "./landscapes/coin";
 import PauseMenu from "./pauseMenu";
 
 export default class Game {
@@ -17,9 +17,6 @@ export default class Game {
         this.cameraOffset = [0, Math.floor(this.canvas.height/2)];
         this.sky = new Sky(this.canvas);
         this.initialPlayerPosition = 50;
-        constructRobotImages();
-        instantiateGrassImages();
-        loadCoinSprites();
         this.generateLandscape();
         this.player = this.initializePlayer();
         this.loop = window.requestAnimationFrame(this.animate);
