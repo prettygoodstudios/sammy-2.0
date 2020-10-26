@@ -219,6 +219,7 @@ export default class Player extends Sprite{
         this.removeEventListeners();
         if(this.controller){
             this.controller.removeElements();
+            delete this.controller;
         }
     }
 

@@ -30,6 +30,7 @@ export default class Game {
         this.pause = new PauseMenu(() => this.paused = true, () =>  this.paused = false, () => {
             this.terminate();
             this.player.endPlayer();
+            delete this.player;
             showMainMenu(); 
         });
     }
@@ -134,10 +135,16 @@ export default class Game {
         this.pause.remove();
         window.cancelAnimationFrame(this.loop);
         this.over = true;
+        delete this.grounds;
+        delete this.pause;
+        delete this.sky;
+        delete this.coins;
+        delete this.robots;
     }
 
     endGame = () => {
         this.terminate();
+        delete this.player;
         showGameOver(this.score);
     }
 }
