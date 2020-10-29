@@ -1,5 +1,5 @@
 import Sky from "./landscapes/sky";
-import Ground from "./grounds/ground";
+import Ground, { LEFT_GROUND_POSITION, MIDDLE_GROUND_POSITION } from "./grounds/ground";
 import Player, { PLAYER_HEIGHT } from "./sprites/player";
 import Robot, { ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver, showMainMenu } from ".";
@@ -75,9 +75,9 @@ export default class Game {
             const left = count*50;
             let coinPlaced = false;
             for(let j = 0; j < blockLength; j++){
-                let position = "middle";
+                let position = MIDDLE_GROUND_POSITION;
                 if(i-1 >= 0 && j == 0){
-                    position = "left";
+                    position = LEFT_GROUND_POSITION;
                 }else if (j == blockLength-1){
                     position = "right";
                 }

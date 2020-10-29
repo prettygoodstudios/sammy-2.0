@@ -7,6 +7,10 @@ const leftGrass = new Image();
 const rightGrass = new Image();
 const middleGrass = new Image();
 
+export const LEFT_GROUND_POSITION = 'left';
+export const RIGHT_GROUND_POSITION = 'right';
+export const MIDDLE_GROUND_POSITION = 'middle';
+
 export const instantiateGrassImages = () => {
     leftGrass.src = LeftGrass;
     rightGrass.src = RightGrass;

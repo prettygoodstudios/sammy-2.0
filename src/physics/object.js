@@ -25,13 +25,17 @@ export default class PhysicalObject extends Geometry {
             if(this.leftCollision(g, Math.abs(this.velocityX)*0.5)){
                 if(this.velocityX > 0){
                     this.velocityX = 0;
-                    //this.x = g.x-this.width;
+                    if(g.position != "middle"){
+                        this.x = g.x-this.width;
+                    }
                 }
             }
             if(this.rightCollision(g, Math.abs(this.velocityX)*0.5)){
                 if(this.velocityX < 0){
                     this.velocityX = 0;
-                    //this.x = g.x+g.width;
+                    if(g.position != "middle"){
+                        this.x = g.x+g.width;
+                    }
                 }
             }
         });

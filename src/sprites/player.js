@@ -58,7 +58,7 @@ class TouchController {
 
 export default class Player extends Sprite{
     constructor(x, y, color, endGame){
-        super(x, y, 50, PLAYER_HEIGHT, 40, 10, 50);
+        super(x, y, 50, PLAYER_HEIGHT, 2, 10, 50);
         this.color = color;
         this.endGame = endGame;
         this.keys = [];
@@ -148,19 +148,19 @@ export default class Player extends Sprite{
                 switch(k){
                     case "up":
                         this.keys.splice(this.keys.indexOf("up"), 1);
-                        this.velocityY -= this.acceleration*3;
+                        this.velocityY -= this.acceleration*3*deltaTime;
                         break;
                     case "down":
-                        this.velocityY += this.acceleration;
+                        this.velocityY += this.accelera*deltaTime;
                         break;
                 }
             }
             switch(k){
                 case "right":
-                    this.velocityX += this.acceleration;
+                    this.velocityX += this.acceleration*deltaTime
                     break;
                 case "left":
-                    this.velocityX -= this.acceleration;
+                    this.velocityX -= this.acceleration*deltaTime
                     break;
             }
         });
