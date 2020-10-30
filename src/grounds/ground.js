@@ -18,7 +18,7 @@ export const instantiateGrassImages = () => {
 }
 
 export default class Ground extends Landscape {
-    constructor(x, y, position = "middle"){
+    constructor(x, y, position = MIDDLE_GROUND_POSITION){
         super(x, y, 50, 50);
         this.leftGrass = leftGrass;
         this.rightGrass = rightGrass;
@@ -33,13 +33,13 @@ export default class Ground extends Landscape {
             if(i == 0){
                 let image = undefined;
                 switch(this.position){
-                    case "left":
+                    case LEFT_GROUND_POSITION:
                         image = this.leftGrass;
                         break;
-                    case "right":
+                    case RIGHT_GROUND_POSITION:
                         image = this.rightGrass;
                         break;
-                    case "middle":
+                    case MIDDLE_GROUND_POSITION:
                         image = this.middleGrass;
                 }
                 context.drawImage(image, this.x-cameraOffset[0]+offset, cameraOffset[1]+this.y+i*this.height+Math.floor(canvas.height/2)-player.height, this.width, this.width);

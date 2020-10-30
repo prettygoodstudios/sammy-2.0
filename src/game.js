@@ -5,6 +5,7 @@ import Robot, { ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver, showMainMenu } from ".";
 import Coin from "./landscapes/coin";
 import PauseMenu from "./pauseMenu";
+import Dragon from "./sprites/dragon";
 
 export default class Game {
     constructor(){
@@ -70,6 +71,7 @@ export default class Game {
         let top = PLAYER_HEIGHT;
         this.robots = [];
         this.coins = [];
+        this.dragons = [];
         for(let i = 0; i < 80; i++){
             const blockLength = Math.floor(Math.random()*8)+6;
             const left = count*50;
@@ -92,6 +94,10 @@ export default class Game {
                 const robot = new Robot(left, top-ROBOT_HEIGHT, 1);
                 this.robots.push(robot);
             }
+            if(Math.random() > 0.5){
+                const dragon = new Dragon(left, top-500);
+                this.dragons.push(dragon);
+            }
             top += Math.floor(Math.random()*300)-150;
             count += blockLength;
         }
@@ -109,6 +115,12 @@ export default class Game {
             if(r.inFrame(this.cameraOffset, this.canvas)){
                 r.updateSprite(deltaTime, this.grounds);
                 r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
+            }
+        });
+        this.dragons.forEach(d => {
+            if(d.inFrame(this.cameraOffset, this.canvas)){
+                d.updateSprite(deltaTime, this.grounds);
+                d.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }
         });
         for(const c of this.coins){
