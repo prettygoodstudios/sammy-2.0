@@ -44,7 +44,6 @@ export default class Ufo extends Sprite {
     constructor(x, y){
         super(x, y, 429*0.3, 330*0.3, 2, 1, 10);
         this.direction = Math.random() > 0.5 ? 1 : -1;
-        this.dead = false;
         this.minX = x - 5000;
         this.maxX = x + 5000;
         this.pellets = [];
@@ -54,20 +53,18 @@ export default class Ufo extends Sprite {
     }
 
     render = (context, canvas, cameraOffset, player, offset) => {
-        if(!this.dead){
-            if(this.inFrame(cameraOffset, canvas)){
-                context.fillStyle = "green";
-                this.spritePos = this.animate(this.sprites, this.spritePos, 0.2);
-                context.drawImage(this.image, this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
-                this.shoot();
-            }
-            this.pellets.forEach((p, i) => {
-                p.render(context, canvas, cameraOffset, player, offset);
-                if(player && p.collides(player)){
-                    player.die();
-                }
-            });
+        if(this.inFrame(cameraOffset, canvas)){
+            context.fillStyle = "green";
+            this.spritePos = this.animate(this.sprites, this.spritePos, 0.2);
+            context.drawImage(this.image, this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
+            this.shoot();
         }
+        this.pellets.forEach(p => {
+            p.render(context, canvas, cameraOffset, player, offset);
+            if(player && p.collides(player)){
+                player.die();
+            }
+        });
     }
 
     updateSprite = (deltaTime, grounds) =>{
@@ -107,9 +104,5 @@ export default class Ufo extends Sprite {
             const pellet = new Pellet(this.x+this.width/2, this.y+this.height, Math.random()*Math.PI*4/6+Math.PI/6);
             this.pellets.push(pellet);
         }
-    }
-
-    die = () => {
-        this.dead = true;
     }
 }

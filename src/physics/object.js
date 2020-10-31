@@ -14,7 +14,8 @@ export default class PhysicalObject extends Geometry {
 
     calculateGravityAndCollsions = (grounds) => {
         let onGround = false;
-        grounds.forEach(g => {
+        const relevantGrounds = grounds.filter(g => g.x > this.x - 400 && this.x+this.width < g.x+g.width+400);
+        relevantGrounds.forEach(g => {
             if(this.collides(g)){
                 if(!this.sideCollision(g)){
                     onGround = true;
