@@ -1,6 +1,7 @@
 import Game from "./game";
 import { instantiateGrassImages } from "./grounds/ground";
 import { loadCoinSprites } from "./landscapes/coin";
+import { instantiateUfoImages } from "./sprites/ufo";
 import { constructRobotImages } from "./sprites/robot";
 
 import styles from "./styles/main.scss";
@@ -22,6 +23,7 @@ window.addEventListener("keypress", spaceListener, {once: true});
 window.onload = () => {
     constructRobotImages();
     instantiateGrassImages();
+    instantiateUfoImages();
     loadCoinSprites();
     showMainMenu();
 }

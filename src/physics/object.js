@@ -49,8 +49,11 @@ export default class PhysicalObject extends Geometry {
         return onGround;
     }
 
-    update = (deltaTime, grounds) => {
-        const onGround = this.calculateGravityAndCollsions(grounds);
+    update = (deltaTime, grounds, usesGravity=true) => {
+        let onGround = false;
+        if(usesGravity){
+            onGround = this.calculateGravityAndCollsions(grounds);
+        }
         this.x += Math.floor(this.velocityX*deltaTime) % this.maxSpeed;
         this.y += Math.floor(this.velocityY*deltaTime) % this.maxSpeed;
         const adjustedDrag = onGround ? this.drag*4 : this.drag;

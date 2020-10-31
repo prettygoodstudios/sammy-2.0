@@ -5,7 +5,7 @@ import Robot, { ROBOT_HEIGHT } from "./sprites/robot";
 import { showGameOver, showMainMenu } from ".";
 import Coin from "./landscapes/coin";
 import PauseMenu from "./pauseMenu";
-import Dragon from "./sprites/dragon";
+import Ufo from "./sprites/ufo";
 
 export default class Game {
     constructor(){
@@ -71,7 +71,7 @@ export default class Game {
         let top = PLAYER_HEIGHT;
         this.robots = [];
         this.coins = [];
-        this.dragons = [];
+        this.ufos = [];
         for(let i = 0; i < 80; i++){
             const blockLength = Math.floor(Math.random()*8)+6;
             const left = count*50;
@@ -95,8 +95,8 @@ export default class Game {
                 this.robots.push(robot);
             }
             if(Math.random() > 0.5){
-                const dragon = new Dragon(left, top-500);
-                this.dragons.push(dragon);
+                const dragon = new Ufo(left, top-500);
+                this.ufos.push(dragon);
             }
             top += Math.floor(Math.random()*300)-150;
             count += blockLength;
@@ -117,7 +117,7 @@ export default class Game {
                 r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }
         });
-        this.dragons.forEach(d => {
+        this.ufos.forEach(d => {
             if(d.inFrame(this.cameraOffset, this.canvas)){
                 d.updateSprite(deltaTime, this.grounds);
                 d.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
@@ -149,6 +149,7 @@ export default class Game {
         delete this.sky;
         delete this.coins;
         delete this.robots;
+        delete this.ufos;
     }
 
     endGame = () => {
