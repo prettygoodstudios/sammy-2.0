@@ -33,7 +33,10 @@ class Pellet extends Geometry {
 
     render = (context, canvas, cameraOffset, player, offset) => {
         context.fillStyle = "orange";
-        context.fillRect(this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
+        context.beginPath();
+        context.arc(this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, 0, Math.PI*2);
+        context.closePath();
+        context.fill();
     }
 }
 
@@ -58,36 +61,33 @@ export default class Ufo extends Sprite {
                 context.drawImage(this.image, this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
                 this.shoot();
             }
-            const deadPellets = [];
             this.pellets.forEach((p, i) => {
-                if(p.inFrame(cameraOffset, canvas) || p.y > -500){
-                    p.render(context, canvas, cameraOffset, player, offset);
-                    if(p.collides(player)){
-                        player.die();
-                    }
-                }else{
-                    deadPellets.push(i);
+                p.render(context, canvas, cameraOffset, player, offset);
+                if(player && p.collides(player)){
+                    player.die();
                 }
-            });
-            deadPellets.forEach(p => {
-                this.pellets.splice(p, 1);
             });
         }
     }
 
     updateSprite = (deltaTime, grounds) =>{
-        if(!this.dead){
-            this.update(deltaTime, grounds, false);
-            this.velocityY = 0;
-            if(this.onGround(grounds)){
-                this.die();
-            }
-            this.switchDirection();
-            this.pellets.forEach(p => {
-                p.update(deltaTime);
-            });
-            this.velocityX = this.acceleration*this.direction;
-        }
+        this.update(deltaTime, [], false);
+        this.velocityY = 0;
+        this.switchDirection();
+        const relevantGrounds = grounds.filter(g => g.x > this.x-1000 && g.x < this.x+1000)
+        const deadPellets = [];
+        this.pellets.forEach((p, i) => {
+            p.update(deltaTime);
+            relevantGrounds.forEach(g => {
+                if(g.collides(p)){
+                    deadPellets.push(i);
+                } 
+            })
+        });
+
+        deadPellets.forEach(p => this.pellets.splice(p, 1));
+        
+        this.velocityX = this.acceleration*this.direction;
     }
 
     switchDirection = () => {

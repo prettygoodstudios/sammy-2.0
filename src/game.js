@@ -43,11 +43,11 @@ export default class Game {
         this.lastUpdate = currentTime;
         if(!this.paused){
             this.renderBackground();
-            this.renderLandscapes(deltaTime);  
-            this.player.updateSprite(deltaTime, this.grounds, this.updateCameraOffset, this.initialPlayerPosition);
-            this.player.render(this.canvas, this.context, this.cameraOffset);
-            this.player.killRobots(this.robots);  
-            this.player.collectCoins(this.coins, this.incrementScore);
+            this.player && this.renderLandscapes(deltaTime);  
+            this.player && this.player.updateSprite(deltaTime, this.grounds, this.updateCameraOffset, this.initialPlayerPosition);
+            this.player && this.player.render(this.canvas, this.context, this.cameraOffset);
+            this.player && this.player.killRobots(this.robots);  
+            this.player && this.player.collectCoins(this.coins, this.incrementScore);
             this.renderScore();
         }
         if(!this.over){
@@ -95,8 +95,8 @@ export default class Game {
                 this.robots.push(robot);
             }
             if(Math.random() > 0.5){
-                const dragon = new Ufo(left, top-500);
-                this.ufos.push(dragon);
+                const ufo = new Ufo(left, top-this.canvas.height*0.5);
+                this.ufos.push(ufo);
             }
             top += Math.floor(Math.random()*300)-150;
             count += blockLength;
@@ -141,7 +141,9 @@ export default class Game {
     }
 
     terminate = () => {
-        this.pause.remove();
+        if(this.pause){
+            this.pause.remove();
+        }
         window.cancelAnimationFrame(this.loop);
         this.over = true;
         delete this.grounds;
@@ -150,6 +152,7 @@ export default class Game {
         delete this.coins;
         delete this.robots;
         delete this.ufos;
+        delete this.pause;
     }
 
     endGame = () => {
