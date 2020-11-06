@@ -79,14 +79,16 @@ export default class Player extends Sprite{
         this.walkFrames.push(playerFrame2);
         this.image = this.walkFrames[0];
         this.walkPosition = 0;
+	this.allowUp = true;
     }
 
     addKey = (k) => {
         switch(k){
             case "arrowup":
             case "w":
-                if(this.keys.indexOf("up") === -1){
+                if(this.keys.indexOf("up") === -1 && this.allowUp){
                     this.keys.push("up");
+		    this.allowUp = false;
                 }
                 break;
             case "arrowdown":
@@ -121,6 +123,7 @@ export default class Player extends Sprite{
                 if(this.keys.indexOf("up") != -1){
                     this.keys.splice(this.keys.indexOf("up"), 1);
                 }
+		this.allowUp = true;
                 break;
             case "arrowdown":
             case "s":
@@ -149,7 +152,8 @@ export default class Player extends Sprite{
                     case "up":
                         this.keys.splice(this.keys.indexOf("up"), 1);
                         this.velocityY -= this.acceleration*3*deltaTime;
-                        break;
+                        console.log("Jumped") 
+			break;
                     case "down":
                         this.velocityY += this.accelera*deltaTime;
                         break;
