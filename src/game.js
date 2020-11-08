@@ -112,17 +112,17 @@ export default class Game {
                 break;
             }
         }
-        this.robots.forEach(r => {
-            if(r.inFrame(this.cameraOffset, this.canvas)){
-                r.updateSprite(deltaTime, this.grounds);
-                r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
+        this.robots.sort((f, s) => Robot.sort(f, s));
+        for(const r of this.robots){
+            r.updateSprite(deltaTime, this.grounds);
+            r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
+            if(r.toRightOfFrame(this.cameraOffset, this.canvas)){
+                break;
             }
-        });
+        }
         this.ufos.forEach(u => {
-            if(this.grounds){
-                u.updateSprite(deltaTime, this.combinedGeometries);
-                u.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
-            }
+            u.updateSprite(deltaTime, this.combinedGeometries);
+            u.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
         });
         for(const c of this.coins){
             if(c.inFrame(this.cameraOffset, this.canvas)){

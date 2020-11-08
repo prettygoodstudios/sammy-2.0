@@ -38,8 +38,8 @@ export default class Robot extends Sprite {
     }
 
     render = (context, canvas, cameraOffset, player, offset) => {
-        this.forwardSpritesPosition = this.animate(this.forwardSprites, this.forwardSpritesPosition);
         if(this.inFrame(cameraOffset, canvas)){
+            this.forwardSpritesPosition = this.animate(this.forwardSprites, this.forwardSpritesPosition);
             context.drawImage(this.image, this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
         }
     }
@@ -62,6 +62,10 @@ export default class Robot extends Sprite {
         if(Math.random() > 0.9 && this.onGround(grounds)){
             this.velocityY = -5;
         }
+    }
+
+    static sort = (first, second) => {
+        return first.x - second.x;
     }
 
 }
