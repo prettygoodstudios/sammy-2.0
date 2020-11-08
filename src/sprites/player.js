@@ -152,7 +152,6 @@ export default class Player extends Sprite{
                     case "up":
                         this.keys.splice(this.keys.indexOf("up"), 1);
                         this.velocityY -= this.acceleration*3*deltaTime;
-                        console.log("Jumped") 
 			break;
                     case "down":
                         this.velocityY += this.accelera*deltaTime;

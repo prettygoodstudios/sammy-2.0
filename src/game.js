@@ -120,14 +120,16 @@ export default class Game {
                 break;
             }
         }
-        this.ufos.forEach(u => {
-            u.updateSprite(deltaTime, this.combinedGeometries);
-            u.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
-        });
         for(const c of this.coins){
             if(c.inFrame(this.cameraOffset, this.canvas)){
                 c.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }else if(c.toRightOfFrame(this.cameraOffset, this.canvas)){
+                break;
+            }
+        }
+        for(const u of this.ufos){
+            u.updateSprite(deltaTime, this.combinedGeometries);
+            if(!u.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition)){
                 break;
             }
         }

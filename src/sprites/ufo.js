@@ -59,12 +59,15 @@ export default class Ufo extends Sprite {
             context.drawImage(this.image, this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, this.height);
             this.shoot();
         }
-        this.pellets.forEach(p => {
+        for(const p of this.pellets){
             p.render(context, canvas, cameraOffset, player, offset);
             if(player && p.collides(player)){
                 player.die();
+                this.pellets.delete;
+                return false;
             }
-        });
+        }
+        return true;
     }
 
     updateSprite = (deltaTime, grounds) =>{
