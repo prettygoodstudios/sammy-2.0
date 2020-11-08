@@ -101,6 +101,7 @@ export default class Game {
             top += Math.floor(Math.random()*300)-150;
             count += blockLength;
         }
+        this.combinedGeometries = [...this.robots, ...this.coins, ...this.grounds];
     }
 
     renderLandscapes = (deltaTime) => {
@@ -117,12 +118,10 @@ export default class Game {
                 r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }
         });
-        this.ufos.forEach(d => {
+        this.ufos.forEach(u => {
             if(this.grounds){
-                if(d.inFrame(this.cameraOffset, this.canvas)){
-                    d.updateSprite(deltaTime, this.grounds);
-                    d.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
-                }
+                u.updateSprite(deltaTime, this.combinedGeometries);
+                u.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
             }
         });
         for(const c of this.coins){
@@ -155,6 +154,7 @@ export default class Game {
         delete this.robots;
         delete this.ufos;
         delete this.pause;
+        delete this.combinedGeometries;
     }
 
     endGame = () => {
