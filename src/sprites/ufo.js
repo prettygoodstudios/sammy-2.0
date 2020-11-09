@@ -103,7 +103,7 @@ export default class Ufo extends Sprite {
     }
 
     shoot = () => {
-        if(Math.random() > 0.98){
+        if(Math.random() > 0.99){
             const pellet = new Pellet(this.x+this.width/2, this.y+this.height, Math.random()*Math.PI*4/6+Math.PI/6);
             this.pellets.push(pellet);
         }

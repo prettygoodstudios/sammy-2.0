@@ -90,11 +90,11 @@ export default class Game {
                     this.coins.push(coin);
                 }
             }
-            if(Math.random() > 0.5){
+            if(Math.random() > 0.5 && i > 1){
                 const robot = new Robot(left, top-ROBOT_HEIGHT, 1);
                 this.robots.push(robot);
             }
-            if(Math.random() > 0.5){
+            if(Math.random() > 0.5 && i > 1){
                 const ufo = new Ufo(left, top-this.canvas.height*0.5);
                 this.ufos.push(ufo);
             }
