@@ -76,14 +76,8 @@ export default class Game {
             const blockLength = Math.floor(Math.random()*8)+6;
             const left = count*50;
             let coinPlaced = false;
+            this.grounds.push(new Ground(left, top, blockLength));
             for(let j = 0; j < blockLength; j++){
-                let position = MIDDLE_GROUND_POSITION;
-                if(i-1 >= 0 && j == 0){
-                    position = LEFT_GROUND_POSITION;
-                }else if (j == blockLength-1){
-                    position = "right";
-                }
-                this.grounds.push(new Ground(left+j*50, top, position));
                 if(!coinPlaced && Math.random() > 0.95){
                     coinPlaced = true;
                     const coin = new Coin(left+j*50, top-50, 25);
