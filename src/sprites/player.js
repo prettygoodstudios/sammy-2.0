@@ -145,7 +145,8 @@ export default class Player extends Sprite{
     }
 
     updateSprite = (deltaTime, grounds, updateCameraOffset, offset) => {
-        const onGround = this.onGround(grounds);
+        const relevantGrounds = this.getRelevantGrounds(grounds);
+        const onGround = this.onGround(relevantGrounds);
         this.keys.forEach(k => {
             if(onGround){
                 switch(k){
@@ -167,13 +168,13 @@ export default class Player extends Sprite{
                     break;
             }
         });
-        if(this.velocityX != 0 && this.onGround(grounds)){
+        if(this.velocityX != 0 && onGround){
             this.walkPosition = this.animate(this.walkFrames, this.walkPosition, 0.2);
         }else{ 
             this.image = this.walkFrames[0];
             this.walkPosition = 0;
         }
-        this.update(deltaTime, grounds);
+        this.update(deltaTime, relevantGrounds);
         if(this.x < offset){
             this.x = offset;
         }
