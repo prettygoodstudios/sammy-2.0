@@ -6,6 +6,7 @@ import { showGameOver, showMainMenu } from ".";
 import Coin from "./landscapes/coin";
 import PauseMenu from "./pauseMenu";
 import Ufo from "./sprites/ufo";
+import { incrementCoins } from "./helpers/db";
 
 export default class Game {
     constructor(){
@@ -156,6 +157,7 @@ export default class Game {
     endGame = () => {
         this.terminate();
         delete this.player;
+        incrementCoins(this.score);
         showGameOver(this.score);
     }
 }
