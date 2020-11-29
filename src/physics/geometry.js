@@ -19,7 +19,7 @@ export default class Geometry {
         const left = this.x + this.width >= geometry.x;
         const right = this.x <= geometry.x + geometry.width;
         const top = this.y+this.height >= geometry.y;
-        const bottom = this.y+this.height <= geometry.y+10;
+        const bottom = this.y+this.height <= geometry.y+this.velocityY*2+5;
         return left && right && top && bottom;
     }
 

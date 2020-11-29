@@ -155,7 +155,7 @@ export default class Player extends Sprite{
                         this.velocityY -= this.acceleration*3*deltaTime;
 			break;
                     case "down":
-                        this.velocityY += this.accelera*deltaTime;
+                        //this.velocityY += this.accelera*deltaTime;
                         break;
                 }
             }

@@ -48,7 +48,7 @@ export default class Robot extends Sprite {
         this.velocityX += this.acceleration;
         this.switchDirection();
         this.jump(grounds);
-        this.update(deltaTime, grounds);
+        this.update(deltaTime, this.getRelevantGrounds(grounds));
     }
 
     switchDirection = () => {
