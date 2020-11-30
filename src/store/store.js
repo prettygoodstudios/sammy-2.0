@@ -25,7 +25,7 @@ export default class Store {
         const carousel = document.querySelector("#carousel");
         carousel.innerHTML = "";
 
-        this.products.forEach((product, i) => {
+        this.products.forEach(product => {
             const productDiv = document.createElement("div");
             productDiv.className = "store__carousel-row__content__product";
             const title = document.createElement("h1");
@@ -34,34 +34,38 @@ export default class Store {
             description.innerHTML = product.description;
             const buyButton = document.createElement("button");
             buyButton.innerHTML = "Buy - $"+product.price;
-            if(i != this.productIndex){
-                productDiv.style.display = "none";
-            }   
             productDiv.appendChild(title);
             productDiv.appendChild(description);
             productDiv.appendChild(buyButton);
             carousel.appendChild(productDiv);
+        });
+        this.filterCarousel();
+    }
+
+    filterCarousel = () => {
+        document.querySelectorAll(".store__carousel-row__content__product").forEach((p, i) => {
+            p.style.display = this.productIndex == i ? "flex" : "none";
         });
     }
 
     incrementCarousel = () => {
         this.productIndex += 1;
         this.productIndex %= this.products.length;
-        this.generateCarousel();
+        this.filterCarousel();
     }
 
     decrementCarousel = () => {
         this.productIndex -= 1;
         this.productIndex = this.productIndex >= 0 ? this.productIndex : this.products.length-1;
-        this.generateCarousel();
+        this.filterCarousel();
     }
 
     close = () => {
-        delete this.products;
-        delete this.productIndex;
         document.removeEventListener("click", this.leftListener);
         document.removeEventListener("click", this.rightListener);
         document.removeEventListener("click", this.goHome);
+        delete this.products;
+        delete this.productIndex;
         closeStore();
     }
 }
