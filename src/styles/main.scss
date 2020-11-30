@@ -2,6 +2,7 @@
 @import "game-over";
 @import "controller";
 @import "pause";
+@import "store";
 
 html, body{
     padding: 0;
@@ -14,8 +15,10 @@ html, body{
 
 
 button{
+    margin: 10px 0px;
     padding: 10px 40px;
     border-radius: 50px;
+    width: 300px;
     border: none;
     background-color: #ececec;
     color: gray;

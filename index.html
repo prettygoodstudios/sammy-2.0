@@ -9,6 +9,7 @@
             <div class="main-menu__body">
                 <h1>Sammy 2.0</h1>
                 <button id="playButton">Play</button>
+                <button id="storeButton">Store</button>
             </div>
             <div class="main-menu__footer">
                 <p>Miguel Rust &copy;2020 Logan, UT</p>
@@ -17,6 +18,21 @@
         <div class="game-over" id="gameOver" style="display: none;">
             <h1>You scored <span id="gameOverScore"></span></h1>
             <button id="playAgain">Try Again!</button>
+        </div>
+        <div class="store" id="store" style="display: none;">
+            <h1>Your Balance: $<span id="storeBalance"></span></h1>
+            <div class="store__carousel-row">
+                <button class="left">
+                    <span></span>
+                    <span></span>
+                </button>
+                <div id="carousel" class="store__carousel-row__content"></div>
+                <button class="right">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <button id="storeGoHome" class="store__btn">Go Home</button>
         </div>
         <canvas id="world"></canvas>
         <script src="dist/index.js"></script>

@@ -5,6 +5,7 @@ import { instantiateUfoImages } from "./sprites/ufo";
 import { constructRobotImages } from "./sprites/robot";
 
 import styles from "./styles/main.scss";
+import Store from "./store/store";
 
 const playButton = document.getElementById("playButton");
 const mainMenu = document.getElementById("mainMenu");
@@ -12,6 +13,8 @@ const canvas = document.getElementById("world");
 const gameOverMenu = document.getElementById("gameOver");
 const playAgain = document.getElementById("playAgain");
 const scoreSpan = document.getElementById("gameOverScore");
+const storeButton = document.getElementById("storeButton");
+const store = document.getElementById("store");
 
 const spaceListener = (e) => {
     if(e.key === " "){
@@ -59,4 +62,16 @@ export const showGameOver = (score) => {
     gameOverMenu.style.display = "flex";
     scoreSpan.innerHTML = score;
     window.addEventListener("keypress", spaceListener, {once: true});
+}
+
+storeButton.addEventListener("click", (e) => {
+    store.style.display = "flex";
+    window.removeEventListener("keypress", spaceListener);
+    mainMenu.style.display = "none";
+    new Store();
+});
+
+export const closeStore = () => {
+    store.style.display = "none";
+    showMainMenu();
 }
