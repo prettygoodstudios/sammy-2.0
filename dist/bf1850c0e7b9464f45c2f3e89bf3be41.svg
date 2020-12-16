@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Frame4</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Robot-Sprites" transform="translate(-1920.000000, -231.000000)">
+            <g id="Frame4" transform="translate(1920.000000, 231.000000)">
+                <g id="Body" fill="#D8D8D8">
+                    <rect id="Rectangle" x="0" y="0" width="500" height="300" rx="70"></rect>
+                </g>
+                <g id="Leg2" transform="translate(366.000000, 369.000000) rotate(-23.000000) translate(-366.000000, -369.000000) translate(316.000000, 269.000000)">
+                    <rect id="Rectangle" fill="#D8D8D8" x="0" y="0" width="100" height="150"></rect>
+                    <rect id="Rectangle" fill="#323232" x="0" y="100" width="100" height="100" rx="50"></rect>
+                </g>
+                <g id="Leg1" transform="translate(100.000000, 300.000000)">
+                    <rect id="Rectangle" fill="#D8D8D8" x="0" y="0" width="100" height="150"></rect>
+                    <rect id="Rectangle" fill="#323232" x="0" y="100" width="100" height="100" rx="50"></rect>
+                </g>
+                <g id="Eyes" transform="translate(89.000000, 48.000000)">
+                    <ellipse id="Oval" stroke="#979797" stroke-width="20" fill="#FFFFFF" cx="72.5" cy="73.0034722" rx="72.5" ry="73.0034722"></ellipse>
+                    <ellipse id="Oval" stroke="#979797" stroke-width="20" fill="#FFFFFF" cx="253.5" cy="73.0034722" rx="72.5" ry="73.0034722"></ellipse>
+                    <ellipse id="Oval" fill="#171616" cx="42" cy="45.5" rx="24" ry="22.5"></ellipse>
+                    <ellipse id="Oval" fill="#171616" cx="294" cy="59.5" rx="24" ry="22.5"></ellipse>
+                </g>
+                <rect id="Rectangle" stroke="#979797" stroke-width="10" fill="#D8D8D8" x="150" y="216" width="200" height="20" rx="10"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

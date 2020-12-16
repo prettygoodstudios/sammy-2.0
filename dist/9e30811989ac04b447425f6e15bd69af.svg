@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="230px" viewBox="0 0 200 230" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Coin2</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-Copy" transform="translate(-533.000000, -106.000000)">
+            <g id="Coin2" transform="translate(533.000000, 121.000000)">
+                <rect id="Rectangle" x="0" y="0" width="200" height="200"></rect>
+                <ellipse id="Oval" stroke="#FF891A" stroke-width="30" fill="#FFD074" cx="100" cy="100" rx="47" ry="100"></ellipse>
+                <text id="1" font-family="Avenir-Black, Avenir" font-size="120" font-weight="700" fill="#FF891A">
+                    <tspan x="66" y="138">1</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

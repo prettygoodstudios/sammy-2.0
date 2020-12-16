@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="429px" height="335px" viewBox="0 0 429 335" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ufo1</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Robot-Sprites" transform="translate(-686.000000, -2188.000000)">
+            <g id="ufo1" transform="translate(686.000000, 2193.000000)">
+                <rect id="Rectangle" fill="#FFBA90" x="79" y="193" width="276" height="118" rx="59"></rect>
+                <ellipse id="Oval" fill="#D8D8D8" cx="214" cy="193" rx="201" ry="96"></ellipse>
+                <ellipse id="Oval" stroke="#000000" stroke-width="10" fill="#AFDAFF" cx="210.5" cy="115.5" rx="134.5" ry="115.5"></ellipse>
+                <ellipse id="Oval" fill="#4BDF2F" cx="207.5" cy="86" rx="50.5" ry="45"></ellipse>
+                <ellipse id="Oval" fill="#4BDF2F" cx="207.5" cy="169" rx="54.5" ry="58"></ellipse>
+                <ellipse id="Oval" fill="#4BDF2F" cx="248" cy="154" rx="37" ry="10"></ellipse>
+                <ellipse id="Oval" fill="#4BDF2F" transform="translate(288.595762, 123.060241) rotate(-81.000000) translate(-288.595762, -123.060241) " cx="288.595762" cy="123.060241" rx="37" ry="10"></ellipse>
+                <ellipse id="Oval" fill="#4BDF2F" transform="translate(280.000000, 68.500000) rotate(-27.000000) translate(-280.000000, -68.500000) " cx="280" cy="68.5" rx="5" ry="20.5"></ellipse>
+                <ellipse id="Oval" fill="#4BDF2F" transform="translate(305.000000, 73.500000) scale(-1, 1) rotate(-27.000000) translate(-305.000000, -73.500000) " cx="305" cy="73.5" rx="5" ry="20.5"></ellipse>
+                <ellipse id="Oval" fill="#4BDF2F" cx="292" cy="90" rx="13" ry="12"></ellipse>
+                <ellipse id="Oval" fill="#FFFFFF" transform="translate(185.500000, 82.500000) rotate(-12.000000) translate(-185.500000, -82.500000) " cx="185.5" cy="82.5" rx="14.5" ry="29.5"></ellipse>
+                <ellipse id="Oval" fill="#FFFFFF" transform="translate(227.500000, 82.500000) rotate(13.000000) translate(-227.500000, -82.500000) " cx="227.5" cy="82.5" rx="14.5" ry="29.5"></ellipse>
+                <rect id="Rectangle" x="0" y="0" width="429" height="330"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

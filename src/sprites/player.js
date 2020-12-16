@@ -189,7 +189,7 @@ export default class Player extends Sprite{
         const killIndexes = [];
         robots.forEach((r, i) => {
             if(this.collides(r)){
-                if(this.topCollision(r)){
+                if(this.topCollision(r) || this.velocityY < 0){
                     killIndexes.push(i);
                 }else{
                     this.die();

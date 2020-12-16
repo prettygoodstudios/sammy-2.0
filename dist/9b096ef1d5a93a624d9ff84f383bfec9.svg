@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Grass</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-632.000000, -362.000000)">
+            <g id="Top-Grass-Group" transform="translate(332.000000, 362.000000)">
+                <g id="Grass" transform="translate(300.000000, 0.000000)">
+                    <rect id="Rectangle" fill="#66BB6A" x="0" y="0" width="300" height="300"></rect>
+                    <path d="M0,100 C19.873877,99.3749755 33.6349447,98.3443766 41.2832031,96.9082031 C51.9193287,94.9109744 70.9547124,89.7281413 77.9472656,87.5820313 C105.735259,79.0535166 120.814866,59.2578125 149,59.2578125 C181.313714,59.2578125 198.904097,85.6981689 231.246094,96.9082031 C243.246825,101.067767 266.164794,102.098366 300,100 L300,300 L0,300 L0,100 Z" id="Rectangle" fill="#A1887F"></path>
+                    <path d="M0,180 C35.976927,170.614783 60.3792707,167.203324 73.2070313,169.765625 C117.26976,178.567003 141.45952,207.25 165,207.25 C171.388595,207.25 216.388595,198.166667 300,180 L300,300 L0,300 L0,180 Z" id="Rectangle" fill="#D7CCC8"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="149px" height="337px" viewBox="0 0 149 337" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ninja0</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Player-Sprite-Sheets" transform="translate(-168.000000, -422.000000)">
+            <g id="ninja0" transform="translate(173.000000, 427.000000)">
+                <rect id="Rectangle" stroke="#979797" stroke-width="10" fill="#FFFFFF" x="0" y="69" width="139" height="189" rx="69.5"></rect>
+                <rect id="Rectangle" stroke="#979797" stroke-width="10" fill="#FFFFFF" x="0" y="0" width="139" height="139" rx="69.5"></rect>
+                <ellipse id="Oval" fill="#FFFCD9" cx="70" cy="68" rx="64" ry="24"></ellipse>
+                <ellipse id="Oval" fill="#000000" cx="47" cy="69" rx="16" ry="12"></ellipse>
+                <ellipse id="Oval" fill="#000000" cx="92" cy="69" rx="16" ry="12"></ellipse>
+                <ellipse id="Oval" stroke="#979797" stroke-width="10" fill="#FFFFFF" cx="41" cy="269" rx="29" ry="58"></ellipse>
+                <ellipse id="Oval" stroke="#979797" stroke-width="10" fill="#FFFFFF" cx="105" cy="269" rx="29" ry="58"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>
