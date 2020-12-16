@@ -4,5 +4,6 @@ export default class Product {
         this.description = description;
         this.img = img;
         this.price = price;
+        this.bought = false;
     }
 }

@@ -15,6 +15,7 @@ const playAgain = document.getElementById("playAgain");
 const scoreSpan = document.getElementById("gameOverScore");
 const storeButton = document.getElementById("storeButton");
 const store = document.getElementById("store");
+const gameOverHome = document.getElementById("gameOverHome");
 
 const spaceListener = (e) => {
     if(e.key === " "){
@@ -69,6 +70,10 @@ storeButton.addEventListener("click", (e) => {
     window.removeEventListener("keypress", spaceListener);
     mainMenu.style.display = "none";
     new Store();
+});
+
+gameOverHome.addEventListener("click", (e) => {
+    showMainMenu();
 });
 
 export const closeStore = () => {

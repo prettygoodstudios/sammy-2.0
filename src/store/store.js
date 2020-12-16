@@ -1,13 +1,10 @@
 import { closeStore } from "..";
-import { getCoins } from "../helpers/db";
+import { getCoins, getProducts, incrementCoins, updateProducts } from "../helpers/db";
 import Product from "./product";
 
 export default class Store {
     constructor(){
-        this.products = [
-            new Product("Laser Gun", "Shoots lasers!!!", null, 30),
-            new Product("Jet Pack", "Pretty Obvious Right?", null, 50)
-        ]
+        this.products = getProducts();
         this.productIndex = 0;
         this.balance = getCoins();
         this.updateBalance();
@@ -34,12 +31,29 @@ export default class Store {
             description.innerHTML = product.description;
             const buyButton = document.createElement("button");
             buyButton.innerHTML = "Buy - $"+product.price;
+            buyButton.addEventListener("click", this.buyItem);
+
             productDiv.appendChild(title);
             productDiv.appendChild(description);
-            productDiv.appendChild(buyButton);
+            if(!product.bought){
+                productDiv.appendChild(buyButton);
+            }
             carousel.appendChild(productDiv);
         });
         this.filterCarousel();
+    }
+
+    buyItem = (e) => {
+        const product = this.products[this.productIndex];
+        if(this.balance >= product.price && !product.bought){
+            product.bought = true;
+            this.balance -= product.price;
+            incrementCoins(-product.price);
+            this.updateBalance();
+            e.target.style.display = "none";
+            updateProducts(this.products);
+        }
+        
     }
 
     filterCarousel = () => {
@@ -67,5 +81,12 @@ export default class Store {
         delete this.products;
         delete this.productIndex;
         closeStore();
+    }
+
+    static getItemsForSale(){
+        return [
+            new Product("Laser Gun", "Shoots lasers!!!", null, 30),
+            new Product("Jet Pack", "Pretty Obvious Right?", null, 50)
+        ]
     }
 }
