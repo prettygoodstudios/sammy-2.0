@@ -87,7 +87,7 @@ export default class Player extends Sprite{
         this.image = this.walkFrames[0];
         this.walkPosition = 0;
         this.allowUp = true;
-        this.extras = getProducts().filter(p => p.bought);
+        this.extras = getProducts().filter(p => p.bought && p.equipped);
         loadJetPackFrames();
         this.hasJetPack = false;
         this.enableExtras();
@@ -209,12 +209,15 @@ export default class Player extends Sprite{
     render = (canvas, context, cameraOffset) => {
         if(this.hasJetPack){
             this.jetpack.render(context, canvas, this.velocityY < 0);
+            if(this.keys.indexOf("left") == -1){
+                this.jetpack.flipDirection(1);
+            }else{
+                this.jetpack.flipDirection(-1);
+            }
         }
         if(this.keys.indexOf("left") == -1){
-            this.jetpack.flipDirection(1);
             context.drawImage(this.image, 50-this.height*0.2, canvas.height/2-this.height, this.height, this.height);
         }else{
-            this.jetpack.flipDirection(-1);
             drawImageFlipped(context, this.image, 50-this.height*0.2, canvas.height/2-this.height, this.height, this.height);
         }        
     }
