@@ -8,11 +8,16 @@ export default class Store {
         this.products = getProducts();
         this.productIndex = 0;
         this.balance = getCoins();
+        this.equipButtonDiv = [];
+        for(let i = 0; i < this.products.length; i++){
+            this.equipButtonDiv.push(document.createElement("div"));
+        } 
         this.updateBalance();
         this.generateCarousel();
         this.leftListener = document.querySelector(".store__carousel-row > .left").addEventListener("click", this.decrementCarousel);
         this.rightListener = document.querySelector(".store__carousel-row > .right").addEventListener("click", this.incrementCarousel);
         this.goHome = document.querySelector("#storeGoHome").addEventListener("click", this.close);
+        
     }
 
     updateBalance = () => {
@@ -23,7 +28,7 @@ export default class Store {
         const carousel = document.querySelector("#carousel");
         carousel.innerHTML = "";
 
-        this.products.forEach(product => {
+        this.products.forEach((product, i) => {
             const productDiv = document.createElement("div");
             productDiv.className = "store__carousel-row__content__product";
             const title = document.createElement("h1");
@@ -41,11 +46,44 @@ export default class Store {
             productDiv.appendChild(description);
             if(!product.bought){
                 productDiv.appendChild(buyButton);
-            }
+            }else{
+                this.equipButtonDiv[i].appendChild(this.generateEquipButton(product));
+            } 
+            productDiv.appendChild(this.equipButtonDiv[i]);
             carousel.appendChild(productDiv);
         });
         this.filterCarousel();
     }
+
+    generateEquipButton = (product) => {
+        const equipButton = document.createElement("button");
+        if(product.equipped){
+            equipButton.innerHTML = "Deactivate";
+            equipButton.addEventListener("click", this.deactivateProduct);
+        }else{
+            equipButton.innerHTML = "Equip!";
+            equipButton.addEventListener("click", this.equipProduct);
+        }
+        return equipButton;
+    }
+
+    equipProduct = (e) => {
+        const product = this.products[this.productIndex];
+        product.equipped = true;
+        updateProducts(this.products);
+        this.equipButtonDiv[this.productIndex].innerHTML = "";
+        this.equipButtonDiv[this.productIndex].appendChild(this.generateEquipButton(product));
+    }
+
+    deactivateProduct = (e) => {
+        const product = this.products[this.productIndex];
+        product.equipped = false;
+        updateProducts(this.products);
+        this.equipButtonDiv[this.productIndex].innerHTML = "";
+        this.equipButtonDiv[this.productIndex].appendChild(this.generateEquipButton(product));
+    }
+
+
 
     buyItem = (e) => {
         const product = this.products[this.productIndex];
@@ -55,6 +93,8 @@ export default class Store {
             incrementCoins(-product.price);
             this.updateBalance();
             e.target.style.display = "none";
+            this.equipButtonDiv[this.productIndex].innerHTML = "";
+            this.equipButtonDiv[this.productIndex].appendChild(this.generateEquipButton(product));
             updateProducts(this.products);
         }
         

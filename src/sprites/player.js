@@ -1,10 +1,12 @@
 import Sprite from "./sprite";
 
-import player0 from "../assets/ninja0.svg";
-import player1 from "../assets/ninja1.svg";
-import player2 from "../assets/ninja2.svg";
+import player0 from "../assets/Sammy1.svg";
+import player1 from "../assets/Sammy2.svg";
+import player2 from "../assets/Sammy3.svg";
+import player3 from "../assets/Sammy4.svg";
 import JetPack, { JETPACK_WIDTH, loadJetPackFrames } from "./jetpack";
 import { getProducts } from "../helpers/db";
+import { drawImageFlipped } from "../helpers/drawing";
 
 
 export const PLAYER_HEIGHT = 100;
@@ -60,7 +62,7 @@ class TouchController {
 
 export default class Player extends Sprite{
     constructor(x, y, color, endGame){
-        super(x, y, 50, PLAYER_HEIGHT, 2, 10, 50);
+        super(x, y, PLAYER_HEIGHT*0.6, PLAYER_HEIGHT, 2, 10, 50);
         this.color = color;
         this.endGame = endGame;
         this.keys = [];
@@ -79,6 +81,9 @@ export default class Player extends Sprite{
         const playerFrame2 = new Image();
         playerFrame2.src = player2;
         this.walkFrames.push(playerFrame2);
+        const playerFrame3 = new Image();
+        playerFrame3.src = player3;
+        this.walkFrames.push(playerFrame3);
         this.image = this.walkFrames[0];
         this.walkPosition = 0;
         this.allowUp = true;
@@ -87,7 +92,7 @@ export default class Player extends Sprite{
         this.hasJetPack = false;
         this.enableExtras();
         if(this.hasJetPack){
-            this.jetpack = new JetPack(65-JETPACK_WIDTH, 0);
+            this.jetpack = new JetPack(65-JETPACK_WIDTH*0.15, 0);
         }
     }
 
@@ -203,16 +208,22 @@ export default class Player extends Sprite{
 
     render = (canvas, context, cameraOffset) => {
         if(this.hasJetPack){
-            this.jetpack.render(context, canvas);
+            this.jetpack.render(context, canvas, this.velocityY < 0);
         }
-        context.drawImage(this.image, 50, canvas.height/2-this.height, this.width, this.height);
+        if(this.keys.indexOf("left") == -1){
+            this.jetpack.flipDirection(1);
+            context.drawImage(this.image, 50-this.height*0.2, canvas.height/2-this.height, this.height, this.height);
+        }else{
+            this.jetpack.flipDirection(-1);
+            drawImageFlipped(context, this.image, 50-this.height*0.2, canvas.height/2-this.height, this.height, this.height);
+        }        
     }
 
     killRobots = (robots) => {
         const killIndexes = [];
         robots.forEach((r, i) => {
             if(this.collides(r)){
-                if(this.topCollision(r) || this.velocityY < 0){
+                if(this.topCollision(r) || this.velocityY < 0 || this.y+this.height < r.y+20){
                     killIndexes.push(i);
                 }else{
                     this.die();

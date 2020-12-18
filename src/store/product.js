@@ -5,5 +5,6 @@ export default class Product {
         this.img = img;
         this.price = price;
         this.bought = false;
+        this.equiped = false;
     }
 }

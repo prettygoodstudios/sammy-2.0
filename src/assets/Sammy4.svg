@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="552px" viewBox="0 0 500 552" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Sammy4</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Robot-Sprites" transform="translate(-3490.000000, -2137.000000)">
+            <g id="Sammy4" transform="translate(3490.000000, 2137.000000)">
+                <circle id="Oval" fill="#445387" cx="253" cy="100" r="100"></circle>
+                <ellipse id="Oval" fill="#DECDB1" cx="276.5" cy="101.5" rx="76.5" ry="47.5"></ellipse>
+                <ellipse id="Oval" fill="#000000" cx="250" cy="101.5" rx="25" ry="25.5"></ellipse>
+                <ellipse id="Oval" fill="#000000" cx="311" cy="101.5" rx="25" ry="25.5"></ellipse>
+                <rect id="Rectangle" fill="#445387" x="153" y="163" width="200" height="251" rx="70"></rect>
+                <rect id="Rectangle" fill="#445387" x="200" y="399" width="34" height="153"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(315.244995, 469.640259) rotate(-19.000000) translate(-315.244995, -469.640259) " x="298.244995" y="393.140259" width="34" height="153"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(350.994966, 237.790214) rotate(-48.000000) translate(-350.994966, -237.790214) " x="333.994966" y="178.790214" width="34" height="118"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(165.213318, 226.486115) rotate(-118.000000) translate(-165.213318, -226.486115) " x="148.213318" y="167.486115" width="34" height="118"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(378.626099, 315.803253) rotate(12.000000) translate(-378.626099, -315.803253) " x="361.626099" y="259.803253" width="34" height="112"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(123.000000, 288.000000) rotate(-14.000000) translate(-123.000000, -288.000000) " x="106" y="232" width="34" height="112"></rect>
+                <rect id="Rectangle" x="0" y="0" width="500" height="552"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
