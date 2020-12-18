@@ -1,6 +1,7 @@
 import { closeStore } from "..";
 import { getCoins, getProducts, incrementCoins, updateProducts } from "../helpers/db";
 import Product from "./product";
+import jetpack1 from "../assets/Jetpack1.svg";
 
 export default class Store {
     constructor(){
@@ -27,6 +28,8 @@ export default class Store {
             productDiv.className = "store__carousel-row__content__product";
             const title = document.createElement("h1");
             title.innerHTML = product.name;
+            const image = new Image();
+            image.src = product.img;
             const description = document.createElement("p");
             description.innerHTML = product.description;
             const buyButton = document.createElement("button");
@@ -34,6 +37,7 @@ export default class Store {
             buyButton.addEventListener("click", this.buyItem);
 
             productDiv.appendChild(title);
+            productDiv.appendChild(image);
             productDiv.appendChild(description);
             if(!product.bought){
                 productDiv.appendChild(buyButton);
@@ -86,7 +90,7 @@ export default class Store {
     static getItemsForSale(){
         return [
             new Product("Laser Gun", "Shoots lasers!!!", null, 30),
-            new Product("Jet Pack", "Pretty Obvious Right?", null, 50)
+            new Product("Jet Pack", "Pretty Obvious Right?", jetpack1, 50)
         ]
     }
 }

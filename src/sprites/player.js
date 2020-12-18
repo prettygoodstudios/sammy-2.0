@@ -3,6 +3,8 @@ import Sprite from "./sprite";
 import player0 from "../assets/ninja0.svg";
 import player1 from "../assets/ninja1.svg";
 import player2 from "../assets/ninja2.svg";
+import JetPack, { JETPACK_WIDTH, loadJetPackFrames } from "./jetpack";
+import { getProducts } from "../helpers/db";
 
 
 export const PLAYER_HEIGHT = 100;
@@ -79,7 +81,22 @@ export default class Player extends Sprite{
         this.walkFrames.push(playerFrame2);
         this.image = this.walkFrames[0];
         this.walkPosition = 0;
-	this.allowUp = true;
+        this.allowUp = true;
+        this.extras = getProducts().filter(p => p.bought);
+        loadJetPackFrames();
+        this.hasJetPack = false;
+        this.enableExtras();
+        if(this.hasJetPack){
+            this.jetpack = new JetPack(65-JETPACK_WIDTH, 0);
+        }
+    }
+
+    enableExtras = () => {
+        this.extras.forEach(e => {
+            if(e.name == "Jet Pack"){
+                this.hasJetPack = true;
+            }
+        });
     }
 
     addKey = (k) => {
@@ -88,7 +105,7 @@ export default class Player extends Sprite{
             case "w":
                 if(this.keys.indexOf("up") === -1 && this.allowUp){
                     this.keys.push("up");
-		    this.allowUp = false;
+		            this.allowUp = false;
                 }
                 break;
             case "arrowdown":
@@ -123,7 +140,7 @@ export default class Player extends Sprite{
                 if(this.keys.indexOf("up") != -1){
                     this.keys.splice(this.keys.indexOf("up"), 1);
                 }
-		this.allowUp = true;
+		        this.allowUp = true;
                 break;
             case "arrowdown":
             case "s":
@@ -153,7 +170,10 @@ export default class Player extends Sprite{
                     case "up":
                         this.keys.splice(this.keys.indexOf("up"), 1);
                         this.velocityY -= this.acceleration*3*deltaTime;
-			break;
+                        if(this.hasJetPack){
+                            this.velocityY -= this.acceleration*3*deltaTime;
+                        }
+			            break;
                     case "down":
                         //this.velocityY += this.accelera*deltaTime;
                         break;
@@ -182,6 +202,9 @@ export default class Player extends Sprite{
     }
 
     render = (canvas, context, cameraOffset) => {
+        if(this.hasJetPack){
+            this.jetpack.render(context, canvas);
+        }
         context.drawImage(this.image, 50, canvas.height/2-this.height, this.width, this.height);
     }
 
