@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="552px" viewBox="0 0 500 552" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Sammy2</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Robot-Sprites" transform="translate(-2490.000000, -2137.000000)">
+            <g id="Sammy2" transform="translate(2490.000000, 2137.000000)">
+                <circle id="Oval" fill="#445387" cx="234" cy="100" r="100"></circle>
+                <ellipse id="Oval" fill="#DECDB1" cx="257.5" cy="101.5" rx="76.5" ry="47.5"></ellipse>
+                <ellipse id="Oval" fill="#000000" cx="231" cy="101.5" rx="25" ry="25.5"></ellipse>
+                <ellipse id="Oval" fill="#000000" cx="292" cy="101.5" rx="25" ry="25.5"></ellipse>
+                <rect id="Rectangle" fill="#445387" x="134" y="163" width="200" height="251" rx="70"></rect>
+                <rect id="Rectangle" fill="#445387" x="181" y="399" width="34" height="153"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(293.000000, 459.500000) rotate(-12.000000) translate(-293.000000, -459.500000) " x="276" y="383" width="34" height="153"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(331.994966, 237.790214) rotate(-48.000000) translate(-331.994966, -237.790214) " x="314.994966" y="178.790214" width="34" height="118"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(146.213318, 226.486115) rotate(-118.000000) translate(-146.213318, -226.486115) " x="129.213318" y="167.486115" width="34" height="118"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(367.323486, 317.053009) rotate(3.000000) translate(-367.323486, -317.053009) " x="350.323486" y="261.053009" width="34" height="112"></rect>
+                <rect id="Rectangle" fill="#445387" transform="translate(98.000000, 292.000000) rotate(6.000000) translate(-98.000000, -292.000000) " x="81" y="236" width="34" height="112"></rect>
+                <rect id="Rectangle" x="0" y="0" width="500" height="552"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
