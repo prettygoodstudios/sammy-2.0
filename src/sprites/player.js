@@ -7,6 +7,7 @@ import player3 from "../assets/Sammy4.svg";
 import JetPack, { JETPACK_WIDTH, loadJetPackFrames } from "./jetpack";
 import { getProducts } from "../helpers/db";
 import { drawImageFlipped } from "../helpers/drawing";
+import Geometry from "../physics/geometry";
 
 
 export const PLAYER_HEIGHT = 100;
@@ -60,6 +61,28 @@ class TouchController {
 
 }
 
+
+class LazerPelet extends Geometry{
+    constructor(x, y, theta){
+        super(x, y, 10, 10);
+        this.theta = theta;
+        this.velocity = 0.8;
+    }
+
+    update = (deltaTime) => {
+        this.y += deltaTime*this.velocity*Math.sin(this.theta);
+        this.x += deltaTime*this.velocity*Math.cos(this.theta);
+    }
+
+    render = (context, canvas, cameraOffset, player, offset) => {
+        context.fillStyle = "red";
+        context.beginPath();
+        context.arc(this.x-cameraOffset[0]+offset, this.y+cameraOffset[1]+Math.floor(canvas.height/2)-player.height, this.width, 0, Math.PI*2);
+        context.closePath();
+        context.fill();
+    }
+}
+
 export default class Player extends Sprite{
     constructor(x, y, color, endGame){
         super(x, y, PLAYER_HEIGHT*0.6, PLAYER_HEIGHT, 2, 10, 50);
@@ -93,16 +116,23 @@ export default class Player extends Sprite{
         this.hasLazer = false;
         this.enableExtras();
         this.lazerPos = [0, 0];
+        this.lazerPelets = [];
+        this.shoot = false;
         if(this.hasJetPack){
             this.jetpack = new JetPack(65-JETPACK_WIDTH*0.15, 0);
         }
         if(this.hasLazer){
             this.mouseListener = document.addEventListener("mousemove", this.updateLazer);
+            this.clickListener = document.addEventListener("click", this.shootLazer);
         }
     }
 
     updateLazer = (e) => {
         this.lazerPos = [e.clientX, e.clientY];
+    }
+
+    shootLazer = (e) => {
+        this.shoot = true;
     }
 
     enableExtras = () => {
@@ -215,6 +245,11 @@ export default class Player extends Sprite{
         if(this.x < offset){
             this.x = offset;
         }
+        if(this.hasLazer){
+            this.lazerPelets.forEach((p, i) => {
+                p.update(deltaTime);
+            });
+        }
         updateCameraOffset(this.x, -this.y);
     }
 
@@ -239,9 +274,25 @@ export default class Player extends Sprite{
             const dist = Math.sqrt(Math.pow(x-this.lazerPos[0], 2) + Math.pow(y-this.lazerPos[1], 2));
             const theta = Math.atan((this.lazerPos[1]-y)/(this.lazerPos[0]-x));
             const segs = Math.floor(dist/50);
-            context.fillStyle = "red";
             const xComponent = 50*Math.cos(theta);
             const yComponent = 50*Math.sin(theta);
+            if(this.shoot){
+                const pellet = new LazerPelet(this.x+this.width, this.y+this.height/2, theta);
+                this.lazerPelets.push(pellet);
+                this.shoot = false;
+            }
+            const deadPellets = [];
+            this.lazerPelets.forEach((pellet, i) => {
+                if(pellet.inFrame(cameraOffset, canvas)){
+                    pellet.render(context, canvas, cameraOffset, this, 50);
+                }else{
+                    deadPellets.push(i);
+                }
+            }); 
+            deadPellets.forEach(i => {
+                this.lazerPelets.splice(i,1);
+            });
+            context.fillStyle = "red";
             for(let s = 1; s <= segs; s++){
                 let rad = 5;
                 if(s == segs){
@@ -253,6 +304,31 @@ export default class Player extends Sprite{
                 context.fill();  
             } 
         }   
+    }
+
+    lazerKill = (robots, ufos) => {
+        let killIndexes = [];
+        robots.forEach((e, i) => {
+            this.lazerPelets.forEach(p => {
+                if(e.collides(p)){
+                    killIndexes.push(i);
+                }
+            });
+        });
+        killIndexes.forEach(k => {
+            robots.splice(k, 1);
+        });
+        killIndexes = [];
+        ufos.forEach((e, i) => {
+            this.lazerPelets.forEach(p => {
+                if(e.collides(p)){
+                    killIndexes.push(i);
+                }
+            });
+        });
+        killIndexes.forEach(k => {
+            ufos.splice(k, 1);
+        });
     }
 
     killRobots = (robots) => {

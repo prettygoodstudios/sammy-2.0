@@ -47,7 +47,8 @@ export default class Game {
             this.player && this.renderLandscapes(deltaTime);  
             this.player && this.player.updateSprite(deltaTime, this.grounds, this.updateCameraOffset, this.initialPlayerPosition);
             this.player && this.player.render(this.canvas, this.context, this.cameraOffset);
-            this.player && this.player.killRobots(this.robots);  
+            this.player && this.player.killRobots(this.robots); 
+            this.player && this.player.lazerKill(this.robots, this.ufos); 
             this.player && this.player.collectCoins(this.coins, this.incrementScore);
             this.renderScore();
         }
