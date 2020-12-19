@@ -90,16 +90,28 @@ export default class Player extends Sprite{
         this.extras = getProducts().filter(p => p.bought && p.equipped);
         loadJetPackFrames();
         this.hasJetPack = false;
+        this.hasLazer = false;
         this.enableExtras();
+        this.lazerPos = [0, 0];
         if(this.hasJetPack){
             this.jetpack = new JetPack(65-JETPACK_WIDTH*0.15, 0);
         }
+        if(this.hasLazer){
+            this.mouseListener = document.addEventListener("mousemove", this.updateLazer);
+        }
+    }
+
+    updateLazer = (e) => {
+        this.lazerPos = [e.clientX, e.clientY];
     }
 
     enableExtras = () => {
         this.extras.forEach(e => {
             if(e.name == "Jet Pack"){
                 this.hasJetPack = true;
+            }
+            if(e.name == "Laser Gun"){
+                this.hasLazer = true;
             }
         });
     }
@@ -219,7 +231,28 @@ export default class Player extends Sprite{
             context.drawImage(this.image, 50-this.height*0.2, canvas.height/2-this.height, this.height, this.height);
         }else{
             drawImageFlipped(context, this.image, 50-this.height*0.2, canvas.height/2-this.height, this.height, this.height);
-        }        
+        }
+
+        if(this.hasLazer){
+            const y =  canvas.height/2-this.height*0.5;
+            const x =  50+this.height*0.6;
+            const dist = Math.sqrt(Math.pow(x-this.lazerPos[0], 2) + Math.pow(y-this.lazerPos[1], 2));
+            const theta = Math.atan((this.lazerPos[1]-y)/(this.lazerPos[0]-x));
+            const segs = Math.floor(dist/50);
+            context.fillStyle = "red";
+            const xComponent = 50*Math.cos(theta);
+            const yComponent = 50*Math.sin(theta);
+            for(let s = 1; s <= segs; s++){
+                let rad = 5;
+                if(s == segs){
+                    rad = 10;
+                }
+                context.beginPath();
+                context.arc(x+xComponent*s, y+yComponent*s, rad, 0, Math.PI*2);
+                context.closePath();
+                context.fill();  
+            } 
+        }   
     }
 
     killRobots = (robots) => {
@@ -267,5 +300,8 @@ export default class Player extends Sprite{
     removeEventListeners = () => {
         window.removeEventListener("keydown", this.handleKeyPress);
         window.removeEventListener("keyup", this.handleKeyUp);
+        if(this.hasLazer){
+            document.removeEventListener("mousemove", this.mouseListener);
+        }
     }
 }
