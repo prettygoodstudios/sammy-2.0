@@ -1,7 +1,7 @@
 import { closeStore } from "..";
 import { getCoins, getProducts, incrementCoins, updateProducts } from "../helpers/db";
 import Product from "./product";
-import jetpack1 from "../assets/Jetpack1.svg";
+import jetpack1 from "../assets/JP1.svg";
 
 export default class Store {
     constructor(){

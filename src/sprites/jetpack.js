@@ -1,7 +1,7 @@
-import jetpack1 from "../assets/JetPack1.svg";
-import jetpack2 from "../assets/JetPack2.svg";
-import jetpack3 from "../assets/JetPack3.svg";
-import jetpack4 from "../assets/JetPack4.svg";
+import jp1 from "../assets/JP1.svg";
+import jp2 from "../assets/JP2.svg";
+import jp3 from "../assets/JP3.svg";
+import jp4 from "../assets/JP4.svg";
 import jetpackstatic from "../assets/jetpackstatic.svg";
 import { animate } from "../helpers/animation";
 import Geometry from "../physics/geometry";
@@ -10,7 +10,7 @@ const frames = [];
 
 export const loadJetPackFrames = () => {
     if(frames.length == 0){
-        const images = [jetpack1, jetpack2, jetpack3, jetpack4];
+        const images = [jp1, jp2, jp3, jp4];
         images.forEach(i => {
             const frame = new Image();
             frame.src = i;
