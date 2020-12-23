@@ -123,7 +123,7 @@ export default class Player extends Sprite{
         }
         if(this.hasLazer){
             this.mouseListener = document.addEventListener("mousemove", this.updateLazer);
-            this.clickListener = document.addEventListener("click", this.shootLazer);
+            this.clickListener = document.getElementById("world").addEventListener("click", this.shootLazer);
         }
     }
 
@@ -378,6 +378,7 @@ export default class Player extends Sprite{
         window.removeEventListener("keyup", this.handleKeyUp);
         if(this.hasLazer){
             document.removeEventListener("mousemove", this.mouseListener);
+            document.getElementById("world").removeEventListener("click", this.clickListener);
         }
     }
 }
