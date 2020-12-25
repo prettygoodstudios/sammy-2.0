@@ -19,7 +19,15 @@ export const updateProducts = (products) => {
 export const getProducts = () => {
     const products = localStorage.getItem(PROUDCTS_KEY);
     if (products){
-        return JSON.parse(products);
+        const savedStore = JSON.parse(products);
+        const productDict = {};
+        savedStore.forEach(p => {
+            productDict[p.id] = p;
+        })
+        return Store.getItemsForSale().map(product => {
+            product.update(productDict[product.id]);
+            return product;
+        });
     }
     updateProducts(Store.getItemsForSale());
     return getProducts();

@@ -8,6 +8,8 @@ import JetPack, { JETPACK_WIDTH, loadJetPackFrames } from "./jetpack";
 import { getProducts } from "../helpers/db";
 import { drawImageFlipped } from "../helpers/drawing";
 import Geometry from "../physics/geometry";
+import { JET_PACK_ID, LAZER_GUN_ID } from "../store/store";
+import Landscape from "../grounds/landscape";
 
 
 export const PLAYER_HEIGHT = 100;
@@ -137,11 +139,13 @@ export default class Player extends Sprite{
 
     enableExtras = () => {
         this.extras.forEach(e => {
-            if(e.name == "Jet Pack"){
-                this.hasJetPack = true;
-            }
-            if(e.name == "Laser Gun"){
-                this.hasLazer = true;
+            switch(e.id){
+                case JET_PACK_ID:
+                    this.hasJetPack = true
+                    break;
+                case LAZER_GUN_ID:
+                    this.hasLazer = true;
+                    break;
             }
         });
     }

@@ -3,6 +3,9 @@ import { getCoins, getProducts, incrementCoins, updateProducts } from "../helper
 import Product from "./product";
 import jetpack1 from "../assets/JP1.svg";
 
+export const LAZER_GUN_ID = 0;
+export const JET_PACK_ID = 1;
+
 export default class Store {
     constructor(){
         this.products = getProducts();
@@ -129,8 +132,8 @@ export default class Store {
 
     static getItemsForSale(){
         return [
-            new Product("Laser Gun", "Shoots lasers!!!", null, 30),
-            new Product("Jet Pack", "Pretty Obvious Right?", jetpack1, 50)
+            new Product(LAZER_GUN_ID, "Laser Gun", "Shoots lasers!!!", null, 30),
+            new Product(JET_PACK_ID, "Jet Pack", "Pretty Obvious Right?", jetpack1, 50)
         ]
     }
 }
