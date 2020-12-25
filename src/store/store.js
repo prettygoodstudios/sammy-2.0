@@ -2,6 +2,7 @@ import { closeStore } from "..";
 import { getCoins, getProducts, incrementCoins, updateProducts } from "../helpers/db";
 import Product from "./product";
 import jetpack1 from "../assets/JP1.svg";
+import lazerImg from "../assets/lazerImg.svg";
 
 export const LAZER_GUN_ID = 0;
 export const JET_PACK_ID = 1;
@@ -132,7 +133,7 @@ export default class Store {
 
     static getItemsForSale(){
         return [
-            new Product(LAZER_GUN_ID, "Laser Gun", "Shoots lasers!!!", null, 30),
+            new Product(LAZER_GUN_ID, "Laser Gun", "Shoots lasers!!!", lazerImg, 30),
             new Product(JET_PACK_ID, "Jet Pack", "Pretty Obvious Right?", jetpack1, 50)
         ]
     }
