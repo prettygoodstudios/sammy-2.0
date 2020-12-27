@@ -4,6 +4,7 @@ import Sprite from "./sprite";
 import ufoImg1 from "../assets/ufo0.svg";
 import ufoImg2 from "../assets/ufo1.svg";
 import ufoImg3 from "../assets/ufo2.svg";
+import { insertionSort } from "../helpers/algos";
 
 const ufoImages = [];
 export const instantiateUfoImages = () => {
@@ -63,7 +64,7 @@ export default class Ufo extends Sprite {
             p.render(context, canvas, cameraOffset, player, offset);
             if(player && p.collides(player)){
                 player.die();
-                this.pellets.delete;
+                delete this.pellets;
                 return false;
             }
         }
@@ -74,16 +75,19 @@ export default class Ufo extends Sprite {
         this.update(deltaTime, [], false);
         this.velocityY = 0;
         this.switchDirection();
-        const relevantGrounds = grounds.filter(g => g.x > this.x-1000 && g.x < this.x+1000)
         const deadPellets = [];
-        this.pellets.forEach((p, i) => {
-            p.update(deltaTime);
-            relevantGrounds.forEach(g => {
-                if(g.collides(p)){
+        insertionSort(this.pellets, (a,b) => a.x-b.x);
+        let relevantGrounds = this.pellets.length > 0 ? grounds.filter(g => g.x+g.width >= this.pellets[0].x && g.x <= this.pellets[this.pellets.length-1].x + this.pellets[this.pellets.length-1].width) : [];
+        for(let i = 0; i < this.pellets.length; i++){
+            const pellet = this.pellets[i];
+            pellet.update(deltaTime);
+            for(let ground = 0; ground < relevantGrounds.length; ground++){
+                if(relevantGrounds[ground].collides(pellet)){
                     deadPellets.push(i);
-                } 
-            })
-        });
+                    break;
+                }
+            }
+        }
 
         deadPellets.forEach(p => this.pellets.splice(p, 1));
         

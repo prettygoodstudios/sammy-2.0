@@ -7,6 +7,7 @@ import Coin from "./landscapes/coin";
 import PauseMenu from "./pauseMenu";
 import Ufo from "./sprites/ufo";
 import { incrementCoins } from "./helpers/db";
+import { insertionSort } from "./helpers/algos";
 
 export default class Game {
     constructor(){
@@ -108,7 +109,7 @@ export default class Game {
                 break;
             }
         }
-        this.robots.sort((f, s) => Robot.sort(f, s));
+        insertionSort(this.robots, (f, s) => Robot.sort(f, s));
         for(const r of this.robots){
             r.updateSprite(deltaTime, this.grounds);
             r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
