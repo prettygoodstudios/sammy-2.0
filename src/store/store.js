@@ -38,7 +38,10 @@ export default class Store {
             const title = document.createElement("h1");
             title.innerHTML = product.name;
             const image = new Image();
+            const imageDiv = document.createElement("div");
+            imageDiv.className = "store__carousel-row__content__product__img";
             image.src = product.img;
+            imageDiv.appendChild(image);
             const description = document.createElement("p");
             description.innerHTML = product.description;
             const buyButton = document.createElement("button");
@@ -46,7 +49,7 @@ export default class Store {
             buyButton.addEventListener("click", this.buyItem);
 
             productDiv.appendChild(title);
-            productDiv.appendChild(image);
+            productDiv.appendChild(imageDiv);
             productDiv.appendChild(description);
             if(!product.bought){
                 productDiv.appendChild(buyButton);
