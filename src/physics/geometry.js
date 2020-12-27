@@ -15,6 +15,13 @@ export default class Geometry {
         return left && right && top && bottom;
     }
 
+    belowCollides = (geometry) => {
+        const left = this.x + this.width >= geometry.x;
+        const right = this.x <= geometry.x + geometry.width;
+        const bottom = this.y <= geometry.y+geometry.height;
+        return left && right && bottom;
+    }
+
     topCollision = (geometry) => {
         const left = this.x + this.width >= geometry.x;
         const right = this.x <= geometry.x + geometry.width;

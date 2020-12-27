@@ -10,6 +10,7 @@ import { drawImageFlipped } from "../helpers/drawing";
 import Geometry from "../physics/geometry";
 import { JET_PACK_ID, LAZER_GUN_ID } from "../store/store";
 import Landscape from "../grounds/landscape";
+import { insertionSort } from "../helpers/algos";
 
 
 export const PLAYER_HEIGHT = 100;
@@ -124,6 +125,8 @@ export default class Player extends Sprite{
             this.jetpack = new JetPack(65-JETPACK_WIDTH*0.15, 0);
         }
         if(this.hasLazer){
+            this.ammo = true;
+            this.lastShot = new Date().getTime();
             this.mouseListener = document.addEventListener("mousemove", this.updateLazer);
             this.clickListener = document.getElementById("world").addEventListener("click", this.shootLazer);
         }
@@ -134,7 +137,11 @@ export default class Player extends Sprite{
     }
 
     shootLazer = (e) => {
-        this.shoot = true;
+        if(this.ammo){
+            this.shoot = true;
+            this.ammo = false;
+            this.lastShot = new Date().getTime();
+        }
     }
 
     enableExtras = () => {
@@ -250,9 +257,25 @@ export default class Player extends Sprite{
             this.x = offset;
         }
         if(this.hasLazer){
+            const deadLazers = [];
+            insertionSort(this.lazerPelets, (a, b) => a.x - b.x);
+            const pelletGrounds = this.lazerPelets.length > 0 ? grounds.filter((g) => g.x + g.width >= this.lazerPelets[0].x && g.x <= this.lazerPelets[this.lazerPelets.length-1].x+this.lazerPelets[0].width) : [];
             this.lazerPelets.forEach((p, i) => {
                 p.update(deltaTime);
+                if(p.y < -2000 || Math.abs(p.x-this.x) > 4000){
+                    deadLazers.push(i);
+                }else{
+                    pelletGrounds.forEach(pg => {
+                        if(pg.belowCollides(p)){
+                            deadLazers.push(i);
+                        }
+                    });
+                }
             });
+
+            deadLazers.forEach(dl => {
+                this.lazerPelets.splice(dl, 1);
+            })
         }
         updateCameraOffset(this.x, -this.y);
     }
@@ -306,7 +329,18 @@ export default class Player extends Sprite{
                 context.arc(x+xComponent*s, y+yComponent*s, rad, 0, Math.PI*2);
                 context.closePath();
                 context.fill();  
-            } 
+            }
+            let endWidth = this.width;
+            if(!this.ammo){
+                const proportion = (new Date().getTime() - this.lastShot)/2000;
+                endWidth = proportion*this.width;
+                if(proportion > 1){
+                    this.ammo = true;
+                }
+            }
+            context.strokeStyle = "red";
+            context.strokeRect(x - this.width, y - this.height, this.width, 10);
+            context.fillRect(x - this.width, y - this.height, endWidth, 10);
         }   
     }
 
