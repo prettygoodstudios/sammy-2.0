@@ -80,3 +80,15 @@ export const closeStore = () => {
     store.style.display = "none";
     showMainMenu();
 }
+
+if('serviceWorker' in navigator){
+    window.addEventListener("load", (e) => {
+        navigator.serviceWorker.
+            register('../serviceWorker.js')
+            .then((register) => {
+                console.log("Registered")
+            }).catch((error) => {
+                console.log("error");
+            });
+    });
+}
