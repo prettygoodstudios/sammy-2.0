@@ -118,7 +118,7 @@ export default class Game {
         }
         insertionSort(this.robots, (f, s) => Robot.sort(f, s));
         let newLast = this.lastRobot;
-        for(let index = this.lastRobot; index < this.robots.length; index++){
+        for(let index = 0; index < this.robots.length; index++){
             const r = this.robots[index];
             r.updateSprite(deltaTime, this.grounds);
             if(r.inFrame(this.cameraOffset, this.canvas)) {

@@ -4,6 +4,9 @@ import rail from "../assets/Rail.svg";
 import train from "../assets/Train.svg";
 import midrise from "../assets/Midrise.svg";
 
+
+const TRAIN_RATIO = 0.1095008052;
+
 export default class Urban {
     constructor(canvas){
         this.midrise = new Image();
@@ -30,6 +33,12 @@ export default class Urban {
             this.pearl
         ];
 
+        this.buildingRatios = [
+            1.2397,
+            2.893,
+            1.20472
+        ]
+
         this.generateUrbanAreas();
     }
 
@@ -48,18 +57,20 @@ export default class Urban {
                     x,
                     y: 300-50,
                     speed: 0.4,
-                    size: this.width/numberOfRails
+                    size: this.width/numberOfRails*0.5
                 }
                 this.trains.push(train);
             }
             if(Math.random()*100 < 99){
                 console.log(Math.floor(Math.random()*(this.buildingAssets.length)))
+                const type = Math.floor(Math.random()*(this.buildingAssets.length));
                 const building = {
                     x,
                     y: -100,
                     speed: 0.4,
                     size: this.width/numberOfRails*0.25,
-                    img: this.buildingAssets[Math.floor(Math.random()*(this.buildingAssets.length))]
+                    img: this.buildingAssets[type],
+                    ratio: this.buildingRatios[type]
                 }
                 this.buildings.push(building);
             }
@@ -76,10 +87,10 @@ export default class Urban {
         this.trains.forEach(t => {
             t.x += 50
             t.x %= this.width;
-            context.drawImage(this.train, t.x-Math.floor(cameraOffset[0]*t.speed)%this.width, cameraOffset[1]+canvas.height/2-50, t.size, 50);
+            context.drawImage(this.train, t.x-Math.floor(cameraOffset[0]*t.speed)%this.width, cameraOffset[1]+canvas.height/2-t.size*TRAIN_RATIO, t.size, t.size*TRAIN_RATIO);
         });
         this.buildings.forEach(b => {
-            context.drawImage(b.img, b.x-Math.floor(cameraOffset[0]*b.speed)%this.width, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1-b.size*1.5, b.size, b.size*1.5);
+            context.drawImage(b.img, b.x-Math.floor(cameraOffset[0]*b.speed)%this.width, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1-b.size*b.ratio, b.size, b.size*b.ratio);
         });
         context.fillStyle = "gray";
         context.fillRect(0, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1, canvas.width, canvas.height/2);
