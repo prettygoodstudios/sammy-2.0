@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="270px" height="45px" viewBox="0 0 270 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>RailGroup</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-83.000000, -468.000000)">
+            <g id="Train-Group" transform="translate(83.000000, 441.000000)">
+                <g id="RailGroup" transform="translate(0.000000, 27.200000)">
+                    <g id="rail" transform="translate(89.800000, 0.000000)">
+                        <rect id="Rectangle" fill="#000000" x="0" y="0" width="89.8" height="4.6"></rect>
+                        <path d="M0,4.6 L0,43.6726807 C14.9666667,17.6242269 29.9333333,4.6 44.9,4.6 C59.8666667,4.6 74.8333333,17.6242269 89.8,43.6726807 L89.8,4.6 L0,4.6 Z" id="Path-7" fill="#4E4D4D"></path>
+                    </g>
+                    <g id="rail">
+                        <rect id="Rectangle" fill="#000000" x="0" y="0" width="89.8" height="4.6"></rect>
+                        <path d="M0,4.6 L0,43.6726807 C14.9666667,17.6242269 29.9333333,4.6 44.9,4.6 C59.8666667,4.6 74.8333333,17.6242269 89.8,43.6726807 L89.8,4.6 L0,4.6 Z" id="Path-7" fill="#4E4D4D"></path>
+                    </g>
+                    <g id="rail" transform="translate(179.600000, 0.000000)">
+                        <rect id="Rectangle" fill="#000000" x="0" y="0" width="89.8" height="4.6"></rect>
+                        <path d="M0,4.6 L0,43.6726807 C14.9666667,17.6242269 29.9333333,4.6 44.9,4.6 C59.8666667,4.6 74.8333333,17.6242269 89.8,43.6726807 L89.8,4.6 L0,4.6 Z" id="Path-7" fill="#4E4D4D"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -8,6 +8,8 @@ import PauseMenu from "./pauseMenu";
 import Ufo from "./sprites/ufo";
 import { incrementCoins } from "./helpers/db";
 import { insertionSort } from "./helpers/algos";
+import Mountains from "./landscapes/mountains";
+import Urban from "./landscapes/urban";
 
 export default class Game {
     constructor(){
@@ -19,6 +21,8 @@ export default class Game {
         this.lastUpdate = new Date().getTime();
         this.cameraOffset = [0, Math.floor(this.canvas.height/2)];
         this.sky = new Sky(this.canvas);
+        this.mountains = new Mountains(this.canvas);
+        this.urban = new Urban(this.canvas);
         this.initialPlayerPosition = 50;
         this.generateLandscape();
         this.player = this.initializePlayer();
@@ -27,6 +31,7 @@ export default class Game {
         this.score = 0;
         this.paused = false;
         this.textColor = "#ececec";
+        this.lastRobot = 0;
         this.pause = new PauseMenu(() => this.paused = true, () =>  this.paused = false, () => {
             this.terminate();
             this.player.endPlayer();
@@ -66,6 +71,8 @@ export default class Game {
 
     renderBackground = () => {
         this.sky.render(this.context, this.canvas, this.cameraOffset);
+        this.mountains.render(this.context, this.canvas, this.cameraOffset);
+        this.urban.render(this.context, this.canvas, this.cameraOffset);
     }
 
     generateLandscape = () => {
@@ -110,13 +117,21 @@ export default class Game {
             }
         }
         insertionSort(this.robots, (f, s) => Robot.sort(f, s));
-        for(const r of this.robots){
+        let newLast = this.lastRobot;
+        for(let index = this.lastRobot; index < this.robots.length; index++){
+            const r = this.robots[index];
             r.updateSprite(deltaTime, this.grounds);
-            r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
+            if(r.inFrame(this.cameraOffset, this.canvas)) {
+                newLast++;     
+                r.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
+            }else{
+                newLast--;
+            }
             if(r.toRightOfFrame(this.cameraOffset, this.canvas)){
                 break;
             }
         }
+        this.lastRobot = newLast-1 > 0 ? newLast-1 : 0;
         for(const c of this.coins){
             if(c.inFrame(this.cameraOffset, this.canvas)){
                 c.render(this.context, this.canvas, this.cameraOffset, this.player, this.initialPlayerPosition);
