@@ -1,8 +1,16 @@
 import Player from "../sprites/player";
-import Geometry from "./geometry";
+import Geometry from "./geometry.ts";
 
 export default class PhysicalObject extends Geometry {
-    constructor(x, y, width, height, acceleration, drag, maxSpeed){
+
+    protected velocityX: number;
+    protected velocityY: number;
+    protected gravity: number;
+    protected acceleration: number;
+    protected maxSpeed: number;
+    protected drag: number;
+
+    constructor(x: number, y: number, width: number, height: number, acceleration: number, drag: number, maxSpeed: number){
         super(x, y, width, height);
         this.drag = drag;
         this.maxSpeed = maxSpeed;

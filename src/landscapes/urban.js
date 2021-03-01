@@ -93,6 +93,6 @@ export default class Urban {
             context.drawImage(b.img, b.x-Math.floor(cameraOffset[0]*b.speed)%this.width, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1-b.size*b.ratio, b.size, b.size*b.ratio);
         });
         context.fillStyle = "gray";
-        context.fillRect(0, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1, canvas.width, canvas.height/2);
+        context.fillRect(0, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1, canvas.width, canvas.height-(cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1));
     }
 }

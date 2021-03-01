@@ -1,4 +1,4 @@
-import Geometry from "../physics/geometry";
+import Geometry from "../physics/geometry.ts";
 
 
 

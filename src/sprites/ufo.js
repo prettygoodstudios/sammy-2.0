@@ -1,5 +1,5 @@
-import Geometry from "../physics/geometry";
-import Sprite from "./sprite";
+import Geometry from "../physics/geometry.ts";
+import Sprite from "./sprite.ts";
 
 import ufoImg1 from "../assets/ufo0.svg";
 import ufoImg2 from "../assets/ufo1.svg";

@@ -38,7 +38,11 @@ module.exports = {
             'file-loader',
  
           ],
-        }
+        },
+        { 
+          test: /\.tsx?$/, 
+          loader: "ts-loader" 
+        },
     ]
   }
 };

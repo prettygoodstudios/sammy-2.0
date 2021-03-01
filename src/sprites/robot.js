@@ -1,4 +1,4 @@
-import Sprite from "./sprite";
+import Sprite from "./sprite.ts";
 import RobotFrame1 from "../assets/RobotFrame1.svg";
 import RobotFrame2 from "../assets/RobotFrame2.svg";
 import RobotFrame3 from "../assets/RobotFrame3.svg";

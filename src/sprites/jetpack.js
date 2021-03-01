@@ -4,7 +4,7 @@ import jp3 from "../assets/JP3.svg";
 import jp4 from "../assets/JP4.svg";
 import jetpackstatic from "../assets/jetpackstatic.svg";
 import { animate } from "../helpers/animation";
-import Geometry from "../physics/geometry";
+import Geometry from "../physics/geometry.ts";
 
 const frames = [];
 
