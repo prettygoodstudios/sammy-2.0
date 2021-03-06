@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="171px" height="212px" viewBox="0 0 171 212" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Midrise</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-485.000000, -300.000000)">
+            <g id="Midrise" transform="translate(485.000000, 300.000000)">
+                <rect id="Rectangle" fill="#4E4D4D" x="28" y="22" width="115" height="190"></rect>
+                <polygon id="Path-6" fill="#FF0000" points="2.91870347e-12 166.858551 29.385498 130 144.385498 130 170.769226 166.858551"></polygon>
+                <polygon id="Path-6" fill="#FF0000" points="2.89028176e-12 101.858551 29.385498 65 144.385498 65 170.769226 101.858551"></polygon>
+                <polygon id="Path-6" fill="#FF0000" points="2.89028176e-12 36.858551 29.385498 1.34500592e-13 144.385498 1.34500592e-13 170.769226 36.858551"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
