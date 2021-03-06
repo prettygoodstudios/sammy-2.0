@@ -1,4 +1,4 @@
-import Geometry from "../physics/geometry.ts";
+import Geometry from "../physics/geometry";
 
 import coinZero from "../assets/Coin0.svg";
 import coinOne from "../assets/Coin1.svg";

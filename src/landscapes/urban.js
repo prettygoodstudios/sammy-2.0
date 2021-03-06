@@ -45,7 +45,6 @@ export default class Urban {
     generateUrbanAreas(){
         const numberOfRails = 10;
         for(let i = 0; i < numberOfRails; i++){
-            console.log(Math.floor(this.width/numberOfRails));
             const x = Math.floor(this.width/numberOfRails)*i;
             const rail = {
                 x,
@@ -91,6 +90,16 @@ export default class Urban {
             }
             context.drawImage(this.rail, x, offsetY, r.size+4, Math.floor(r.size*0.1));
         }
+        for(let r of this.rails) {
+            const x = r.x-Math.floor(cameraOffset[0]*r.speed)%this.width+this.width;
+            if(x < -r.size-4) {
+                continue;
+            }
+            if(x > canvas.width) {
+                break;
+            }
+            context.drawImage(this.rail, x, offsetY, r.size+4, Math.floor(r.size*0.1));
+        }
         for(let t of this.trains) {
             t.x += 50
             t.x %= this.width;
@@ -108,6 +117,19 @@ export default class Urban {
         }
         for(let b of this.buildings) {
             const x = b.x-Math.floor(cameraOffset[0]*b.speed)%this.width;
+
+            if (x  < -b.size){
+                continue;
+            }
+
+            if (x > canvas.width){
+                break;
+            }
+
+            context.drawImage(b.img, x, offsetY+this.rails[0].size*0.1-b.size*b.ratio, b.size, b.size*b.ratio);
+        }
+        for(let b of this.buildings) {
+            const x = b.x-Math.floor(cameraOffset[0]*b.speed)%this.width+this.width;
 
             if (x  < -b.size){
                 continue;
