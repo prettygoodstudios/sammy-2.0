@@ -8,7 +8,7 @@ const dir = fs.readdir("./dist", (error, directory) => {
     });
 });
 
-const workerFile = fs.readFile("./serviceWorker.js", (error, data) => {
+fs.readFile("./serviceWorker.js", (error, data) => {
     const contents = data.toString();
     const segments = contents.split("cacheAssets = [");
     segments[0] += "cacheAssets = [";
