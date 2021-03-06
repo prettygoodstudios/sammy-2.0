@@ -1,5 +1,5 @@
 import { animate } from "../helpers/animation";
-import PhysicalObject from "../physics/object.ts";
+import PhysicalObject from "../physics/object";
 import Player from "./player";
 
 export default abstract class Sprite extends PhysicalObject {

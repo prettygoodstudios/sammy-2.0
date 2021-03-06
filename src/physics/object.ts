@@ -1,5 +1,4 @@
-import Player from "../sprites/player";
-import Geometry from "./geometry.ts";
+import Geometry from "./geometry";
 
 export default class PhysicalObject extends Geometry {
 
@@ -20,7 +19,7 @@ export default class PhysicalObject extends Geometry {
         this.gravity = 0.5;
     }
 
-    calculateGravityAndCollsions = (grounds) => {
+    calculateGravityAndCollsions = (grounds : Geometry[]) : boolean => {
         let onGround = false;
         grounds.forEach(g => {
             if(this.collides(g)){
@@ -53,7 +52,7 @@ export default class PhysicalObject extends Geometry {
         return onGround;
     }
 
-    update = (deltaTime, grounds, usesGravity=true) => {
+    update = (deltaTime: number, grounds: Geometry[], usesGravity: boolean=true) => {
         let onGround = false;
         if(usesGravity){
             onGround = this.calculateGravityAndCollsions(grounds);
@@ -73,7 +72,7 @@ export default class PhysicalObject extends Geometry {
     }
 
     //Purely for debugging
-    renderVelocity = (context) => {
+    renderVelocity = (context: CanvasRenderingContext2D) => {
         context.strokeStyle = "yellow";
         const left = 100;
         const top = 100;
@@ -84,7 +83,7 @@ export default class PhysicalObject extends Geometry {
         context.stroke();
     }
 
-    onGround = (grounds) => {
+    onGround = (grounds: Geometry[]) => {
         let onGround = false;
         grounds.forEach(g => {
             if(this.collides(g)){
@@ -94,7 +93,7 @@ export default class PhysicalObject extends Geometry {
         return onGround;
     }
 
-    getRelevantGrounds = (grounds) => {
-        return grounds.filter(g => g.x+g.width >= this.x && this.x+this.width < g.x+g.width+400);;
+    getRelevantGrounds = (grounds: Geometry[]) => {
+        return grounds.filter(g => g.x+g.width >= this.x && this.x+this.width < g.x+g.width+400);
     }
 }

@@ -1,9 +1,9 @@
 export default class Geometry {
 
-    protected x: number;
-    protected y: number;
-    protected width: number;
-    protected height: number;
+    public x: number;
+    public y: number;
+    public width: number;
+    public height: number;
 
     constructor(x: number, y: number, width: number, height: number){
         this.x = x;
@@ -60,5 +60,4 @@ export default class Geometry {
     toRightOfFrame = (cameraOffset, canvas) => {
         return this.x-cameraOffset[0]+this.width > canvas.width;
     }
-
 }

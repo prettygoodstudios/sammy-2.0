@@ -7,7 +7,7 @@ import player3 from "../assets/Sammy4.svg";
 import JetPack, { JETPACK_WIDTH, loadJetPackFrames } from "./jetpack";
 import { getProducts } from "../helpers/db";
 import { drawImageFlipped } from "../helpers/drawing";
-import Geometry from "../physics/geometry.ts";
+import Geometry from "../physics/geometry";
 import { JET_PACK_ID, LAZER_GUN_ID } from "../store/store";
 import Landscape from "../grounds/landscape";
 import { insertionSort } from "../helpers/algos";

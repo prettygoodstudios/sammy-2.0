@@ -20,7 +20,7 @@ export default class Urban {
         this.train = new Image();
         this.train.src = train;
         this.rails = [];
-        this.width = canvas.width*10;
+        this.width = Math.floor(canvas.width*10);
         this.height = canvas.height;
 
 
@@ -44,13 +44,14 @@ export default class Urban {
 
     generateUrbanAreas(){
         const numberOfRails = 10;
-        let x = 0;
         for(let i = 0; i < numberOfRails; i++){
+            console.log(Math.floor(this.width/numberOfRails));
+            const x = Math.floor(this.width/numberOfRails)*i;
             const rail = {
                 x,
                 y: 300,
                 speed: 0.4,
-                size: this.width/numberOfRails
+                size: Math.ceil(this.width/numberOfRails)
             }
             if(Math.random()*100 < 50) {
                 const train = {
@@ -62,7 +63,6 @@ export default class Urban {
                 this.trains.push(train);
             }
             if(Math.random()*100 < 99){
-                console.log(Math.floor(Math.random()*(this.buildingAssets.length)))
                 const type = Math.floor(Math.random()*(this.buildingAssets.length));
                 const building = {
                     x,
@@ -74,24 +74,51 @@ export default class Urban {
                 }
                 this.buildings.push(building);
             }
-            x += this.width/numberOfRails;
             this.rails.push(rail);
             
         }
     }
 
     render(context, canvas, cameraOffset){
-        this.rails.forEach(r => {
-            context.drawImage(this.rail, r.x-Math.floor(cameraOffset[0]*r.speed)%this.width, cameraOffset[1]+canvas.height/2, r.size+4, r.size*0.1);
-        });
-        this.trains.forEach(t => {
+        const offsetY = cameraOffset[1]+canvas.height/2;
+        for(let r of this.rails) {
+            const x = r.x-Math.floor(cameraOffset[0]*r.speed)%this.width;
+            if(x < -r.size-4) {
+                continue;
+            }
+            if(x > canvas.width) {
+                break;
+            }
+            context.drawImage(this.rail, x, offsetY, r.size+4, Math.floor(r.size*0.1));
+        }
+        for(let t of this.trains) {
             t.x += 50
             t.x %= this.width;
-            context.drawImage(this.train, t.x-Math.floor(cameraOffset[0]*t.speed)%this.width, cameraOffset[1]+canvas.height/2-t.size*TRAIN_RATIO, t.size, t.size*TRAIN_RATIO);
-        });
-        this.buildings.forEach(b => {
-            context.drawImage(b.img, b.x-Math.floor(cameraOffset[0]*b.speed)%this.width, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1-b.size*b.ratio, b.size, b.size*b.ratio);
-        });
+            const x  = t.x-Math.floor(cameraOffset[0]*t.speed)%this.width;
+
+            if (x  < -t.size){
+                continue;
+            }
+
+            if (x > canvas.width){
+                continue;
+            }
+
+            context.drawImage(this.train, x, offsetY-t.size*TRAIN_RATIO, t.size, t.size*TRAIN_RATIO);
+        }
+        for(let b of this.buildings) {
+            const x = b.x-Math.floor(cameraOffset[0]*b.speed)%this.width;
+
+            if (x  < -b.size){
+                continue;
+            }
+
+            if (x > canvas.width){
+                break;
+            }
+
+            context.drawImage(b.img, x, offsetY+this.rails[0].size*0.1-b.size*b.ratio, b.size, b.size*b.ratio);
+        }
         context.fillStyle = "gray";
         context.fillRect(0, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1, canvas.width, canvas.height-(cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1));
     }

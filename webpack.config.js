@@ -40,9 +40,12 @@ module.exports = {
           ],
         },
         { 
-          test: /\.tsx?$/, 
+          test: /\.m?tsx?$/, 
           loader: "ts-loader" 
         },
     ]
-  }
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  },
 };
