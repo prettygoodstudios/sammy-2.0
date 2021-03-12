@@ -6,6 +6,7 @@ import midrise from "../assets/Midrise.svg";
 
 
 const TRAIN_RATIO = 0.1095008052;
+const RAIL_RATIO = 0.1666666667;
 
 export default class Urban {
     constructor(canvas){
@@ -88,7 +89,7 @@ export default class Urban {
             if(x > canvas.width) {
                 break;
             }
-            context.drawImage(this.rail, x, offsetY, r.size+4, Math.floor(r.size*0.1));
+            context.drawImage(this.rail, x, offsetY, r.size+4, Math.floor(r.size*RAIL_RATIO+4));
         }
         for(let r of this.rails) {
             const x = r.x-Math.floor(cameraOffset[0]*r.speed)%this.width+this.width;
@@ -98,7 +99,7 @@ export default class Urban {
             if(x > canvas.width) {
                 break;
             }
-            context.drawImage(this.rail, x, offsetY, r.size+4, Math.floor(r.size*0.1));
+            context.drawImage(this.rail, x, offsetY, r.size+4, Math.floor(r.size*RAIL_RATIO+4));
         }
         for(let t of this.trains) {
             t.x += 50
@@ -126,7 +127,7 @@ export default class Urban {
                 break;
             }
 
-            context.drawImage(b.img, x, offsetY+this.rails[0].size*0.1-b.size*b.ratio, b.size, b.size*b.ratio);
+            context.drawImage(b.img, x, offsetY+this.rails[0].size*RAIL_RATIO-b.size*b.ratio, b.size, b.size*b.ratio);
         }
         for(let b of this.buildings) {
             const x = b.x-Math.floor(cameraOffset[0]*b.speed)%this.width+this.width;
@@ -139,9 +140,9 @@ export default class Urban {
                 break;
             }
 
-            context.drawImage(b.img, x, offsetY+this.rails[0].size*0.1-b.size*b.ratio, b.size, b.size*b.ratio);
+            context.drawImage(b.img, x, offsetY+this.rails[0].size*RAIL_RATIO-b.size*b.ratio, b.size, b.size*b.ratio);
         }
-        context.fillStyle = "gray";
-        context.fillRect(0, cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1, canvas.width, canvas.height-(cameraOffset[1]+canvas.height/2+this.rails[0].size*0.1));
+        context.fillStyle = "#68C18C";
+        context.fillRect(0, cameraOffset[1]+canvas.height/2+this.rails[0].size*RAIL_RATIO, canvas.width, canvas.height-(cameraOffset[1]+canvas.height/2+this.rails[0].size*RAIL_RATIO));
     }
 }

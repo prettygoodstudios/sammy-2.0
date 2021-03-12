@@ -169,6 +169,7 @@ export default class Game {
         delete this.ufos;
         delete this.pause;
         delete this.combinedGeometries;
+        delete this.urban;
     }
 
     endGame = () => {

@@ -26,9 +26,14 @@ export const constructRobotImages = () => {
 }
 
 export default class Robot extends Sprite {
+    private velocity: number;
+    private direction: number;
+    private forwardSprites: ImageBitmap[];
+    private forwardSpritesPosition: number;
+    private image: ImageBitmap;
+    
     constructor(x, y, direction){
         super(x, y, 50, ROBOT_HEIGHT, 3, 0.1, 10);
-        this.color = "black";
         this.direction = direction;
         this.velocity = 2;
         this.acceleration = this.direction*this.velocity;  

@@ -1,4 +1,4 @@
-const cacheName = 'v5';
+const cacheName = 'v7';
 const cacheAssets = [	
 '../dist/index.js',	
 '../dist/ed1d54b3fea059591e128baee192bf71.svg',	
@@ -35,7 +35,8 @@ const cacheAssets = [
 '../dist/15e9908b7c64edc3f70b9c916b248cf8.svg',	
 '../dist/1259d3325af3d0f488508125fee8c7be.svg',	
 '../dist/114f25a880fd0a875069232a93f3dc04.svg',	
-'../dist/03d33d9df061d554066d8b21e2ea4ec0.svg',
+'../dist/03d33d9df061d554066d8b21e2ea4ec0.svg',	
+'index.html',
 ];
 
 
@@ -78,6 +79,7 @@ self.addEventListener('fetch', (event) => {
         caches.match(event.request).then((response) => response || fetch(event.request))
         .catch(() => {
             console.log(caches);
+            console.log(caches.keys);
             return caches.match('index.html');
         })
     );
